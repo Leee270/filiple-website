@@ -124,6 +124,61 @@
   }
   .contact-list a:hover{border-color:var(--accent); background:var(--accent-soft);}
 
+  /* Aktier */
+  .marquee-wrap{border:1px solid var(--border); border-radius:10px; background:var(--surface); overflow:hidden; white-space:nowrap; padding:10px 0; margin-bottom:8px;}
+  .marquee{display:inline-flex; gap:32px; font-family:var(--font-mono); font-size:12.5px; animation:mscroll 32s linear infinite; padding-left:100%;}
+  @keyframes mscroll{ from{transform:translateX(0);} to{transform:translateX(-100%);} }
+  .mtick{color:var(--text-muted);}
+  .mtick b{color:var(--text); margin:0 6px;}
+  .mtick .mup{color:#4FBF83;} .mtick .mdown{color:#E2574C;}
+
+  .setup{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; font-size:13.5px;}
+  .setup label{display:block; font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.05em;}
+  .setup input{width:100%; max-width:360px; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:9px 12px; border-radius:6px; font-family:var(--font-mono); font-size:13px;}
+  .setup input:focus{border-color:var(--accent); outline:none;}
+  .setup .btnrow{display:flex; gap:10px; margin-top:10px; align-items:center; flex-wrap:wrap;}
+  .setup button{background:var(--accent); color:var(--bg); border:none; padding:9px 16px; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer; font-family:var(--font-body);}
+  .setup button:hover{opacity:.9;}
+  .setup .hint{color:var(--text-muted); font-size:12.5px;}
+  .setup .hint a{color:var(--accent);}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+  .scard{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px; cursor:pointer; text-align:left; color:inherit; font-family:inherit; width:100%; transition:border-color .15s;}
+  .scard:hover, .scard.active{border-color:var(--accent);}
+  .scard .sym{font-family:var(--font-mono); font-weight:700; font-size:13px;}
+  .scard .name{color:var(--text-muted); font-size:11.5px; margin:2px 0 8px;}
+  .scard .price{font-family:var(--font-mono); font-size:17px; font-weight:500;}
+  .scard .chg{font-family:var(--font-mono); font-size:12px; margin-top:2px;}
+  .scard .chg.up{color:#4FBF83;} .scard .chg.down{color:#E2574C;} .scard .chg.flat{color:var(--text-muted);}
+  .scard .loading{color:var(--text-muted); font-size:11.5px; font-family:var(--font-mono);}
+
+  .detail{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px;}
+  .detail-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .detail-head .sym{font-family:var(--font-mono); font-size:20px; font-weight:700;}
+  .detail-price{font-family:var(--font-mono); font-size:26px; font-weight:500;}
+  .stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(90px,1fr)); gap:10px; margin:14px 0; font-family:var(--font-mono); font-size:12px;}
+  .stat{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 10px;}
+  .stat .k{color:var(--text-muted); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;}
+  .rec-bar{display:flex; height:10px; border-radius:5px; overflow:hidden; margin:6px 0 4px; background:var(--bg);}
+  .rec-legend{display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--text-muted); font-family:var(--font-mono);}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:4px;}
+  .snews{list-style:none; padding:0; margin:0;}
+  .snews li{background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:8px; transition:border-color .15s;}
+  .snews li:hover{border-color:var(--accent);}
+  .snews a{color:var(--text); text-decoration:none; font-size:13.5px; font-weight:500; display:block; margin-bottom:5px;}
+  .snews a:hover{color:var(--accent);}
+  .snews-meta{display:inline-block; color:var(--accent); font-size:10.5px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.04em; background:var(--accent-soft); padding:2px 8px; border-radius:4px; margin-bottom:6px;}
+  .snews-sum{color:var(--text-muted); font-size:12.5px; margin-top:4px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .readmore{display:inline-flex; align-items:center; gap:6px; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:7px 12px; font-size:12px; font-family:var(--font-mono); text-decoration:none; color:var(--text);}
+  .scard-full{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:12px;}
+  .scard-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+  .scard-head .sym{font-family:var(--font-mono); font-weight:700; font-size:14px;}
+  .scard-head .fname{color:var(--text-muted); font-size:13px;}
+  .scard-head .price{font-family:var(--font-mono); font-size:15px; font-weight:500; margin-left:auto;}
+  .scard-head .chg{font-family:var(--font-mono); font-size:12.5px;}
+  .scard-head .chg.up{color:#4FBF83;} .scard-head .chg.down{color:#E2574C;}
+  .ssum{font-size:13.5px; margin:0;}
+
   footer{max-width:720px; margin:0 auto; padding:0 24px 60px; color:var(--text-muted); font-size:12.5px;}
 </style>
 </head>
@@ -138,6 +193,7 @@
       <button data-panel="cyber">Cybersäkerhet</button>
       <button data-panel="lardig">Lär dig</button>
       <button data-panel="github">GitHub</button>
+      <button data-panel="aktier">Aktier</button>
       <button data-panel="kontakt">Kontakt</button>
     </nav>
   </div>
@@ -153,14 +209,14 @@
 
     <section class="block">
       <h2>Om mig</h2>
-      <p>[Skriv 3–4 meningar här om vad som väckte ditt intresse för cybersäkerhet, vad som driver dig, och lite om vem du är utanför skärmen. Ju mer personligt, desto mer minns folk dig.]</p>
+      <p>Jag blev intresserad av cybersäkerhet när jag upptäckte hur mycket som händer bakom kulisserna på internet. Sedan dess har jag fastnat för att lära mig hur system fungerar, bygga egna projekt och ständigt utveckla mina tekniska kunskaper. Jag motiveras av att lösa problem och utmana mig själv, både inom teknik och i vardagen. När jag inte sitter vid datorn tränar jag och följer gärna börsen och mina investeringar.</p>
     </section>
 
     <section class="block">
       <h2>Resan</h2>
       <ul class="roadmap">
         <li><span class="when">Nu</span><span class="what">Förbereder mig på egen hand — grunder i nätverk, Linux och cybersäkerhet</span></li>
-        <li><span class="when">[Termin/år]</span><span class="what">Börjar studera nätverk, digital infrastruktur & cybersäkerhet</span></li>
+        <li><span class="when">Höstterminen 2026</span><span class="what">Börjar studera nätverk, digital infrastruktur & cybersäkerhet</span></li>
         <li><span class="when">Under studierna</span><span class="what">Certifieringar, hemmalabb och praktiska projekt, dokumenterade här och på GitHub</span></li>
         <li><span class="when">Mål</span><span class="what">Bygga en karriär inom cybersäkerhet och digital infrastruktur efter examen</span></li>
       </ul>
@@ -197,8 +253,8 @@
     <section class="block">
       <h2>Kunskapsstack</h2>
       <ul class="skills">
-        <li><span>Nätverk & infrastruktur</span><span class="status">påbörjas [termin]</span></li>
-        <li><span>Cybersäkerhet</span><span class="status">påbörjas [termin]</span></li>
+        <li><span>Nätverk & infrastruktur</span><span class="status">påbörjas HT 2026</span></li>
+        <li><span>Cybersäkerhet</span><span class="status">påbörjas HT 2026</span></li>
         <li><span>Linux</span><span class="status">pågår</span></li>
         <li><span>Python</span><span class="status">pågår</span></li>
       </ul>
@@ -225,7 +281,16 @@
 
     <section class="block">
       <h2>Projekt</h2>
-      <div class="empty">[ ] Inga projekt publicerade än — första projektet är på väg, håll utkik.</div>
+      <div class="proj">
+        <div class="cert-title">filiple.com — portfolio & CV-sida</div>
+        <p style="margin:6px 0 8px; font-size:13.5px;">Byggde min egen portfolio/CV-sida från grunden, med ett ljust professionellt läge och ett mörkt "hacker"-läge som växlar beroende på vilken sektion man är i. Innehåller bland annat en accordion-FAQ om nätverksgrunder.</p>
+        <a href="https://github.com/Leee270/filiple-website" target="_blank" rel="noopener">Se koden på GitHub →</a>
+      </div>
+      <div class="proj">
+        <div class="cert-title">Aktie-terminal</div>
+        <p style="margin:6px 0 8px; font-size:13.5px;">En börsterminal-inspirerad dashboard som visar öppningspriser, riktkurser, rekommendationer och nyheter för svenska (Ericsson, Investor, Volvo, Saab) och globala bolag (Tesla, Nvidia, AMD, Palantir, CrowdStrike, AST SpaceMobile, SpaceX). Sammanställs manuellt (med hjälp av Claude) från Börskollen och Affärsvärlden — inbyggd direkt på sajten, se fliken "Aktier".</p>
+      </div>
+      <div class="empty">[ ] Nästa projekt är på väg — håll utkik.</div>
     </section>
 
     <section class="block">
@@ -234,6 +299,112 @@
         <div class="cert-title">GitHub-profil</div>
         <a href="https://github.com/Leee270" target="_blank" rel="noopener">github.com/Leee270 →</a>
       </div>
+    </section>
+  </section>
+
+  <!-- AKTIER -->
+  <section class="panel" id="panel-aktier" data-theme="dark">
+    <p class="eyebrow">Aktier</p>
+    <h1>$ aktie-terminal</h1>
+    <p class="lede">Bolag jag bevakar — kurser och nyheter sammanställda av mig (med hjälp av Claude), senast uppdaterat 3 juli 2026.</p>
+
+    <div class="marquee-wrap"><div class="marquee">
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
+    </div></div>
+
+    <section class="block" style="margin-top:24px;">
+      <h2>Svenska bolag</h2>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">ERIC B</span><span class="fname">Ericsson</span><span class="price">112,0 SEK</span><span class="chg down">▼ -1,8%</span></div>
+        <p class="ssum">Störst nyhet just nu: Per Narvinger tar över som vd och koncernchef 1 oktober 2026 efter Börje Ekholm. Ericsson har även inlett rättsliga åtgärder mot Transsion för påstått patentintrång kring 4G/5G. <strong>Riktkurs (Börskollen):</strong> ~103 kr. <strong>Rekommendation:</strong> Blandad — Handelsbanken/Nordea Köp, Goldman Sachs Sälj.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">INVE B</span><span class="fname">Investor</span><span class="price">~380 SEK</span><span class="chg up">▲ stigande trend</span></div>
+        <p class="ssum">Investmentbolaget bakom bland annat ABB, AstraZeneca, Ericsson och Saab. Aktien ligger i en stigande trendkanal med stöd kring 373 kr. Senaste kvartalsrapporten (Q3, rapporterad 22 jan 2026) visade omsättning på 71,3 md SEK och vinst på 55,4 md SEK. <strong>Riktkurs (Börskollen):</strong> ~382 kr. <strong>Rekommendation:</strong> Blandad — SEB Behåll, DNB Carnegie Köp.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">VOLV B</span><span class="fname">Volvo</span><span class="price">338,6 SEK</span><span class="chg up">▲ +1,9%</span></div>
+        <p class="ssum">Lastbilstillverkaren steg nästan 2% senaste dagen. Bolaget har tidigare fallit ~3% efter sin Capital Markets Day, men siktar på nästan 3 md USD i intäkter från autonom transport. <strong>Riktkurs (Börskollen):</strong> ~353 kr. <strong>Rekommendation (Affärsvärlden/Placera):</strong> Köp (konsensus övervikt, 64% positiva rekommendationer).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">SAAB B</span><span class="fname">Saab</span><span class="price">519,5 SEK</span><span class="chg up">▲ +3,3%</span></div>
+        <p class="ssum">Starkt Q1 2026 med 23,6% organisk försäljningstillväxt. Aktien har fått extra skjuts av uppgifter om att NATO planerar ersätta en flotta med Saab-produkter, samt att Polen valt Saabs Kockums som leverantör av nästa generations ubåtar. <strong>Riktkurs (Börskollen):</strong> ~610 kr. <strong>Rekommendation (Börskollen):</strong> Köp (bl.a. SEB, Danske Bank, Pareto Securities).</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Globala bolag</h2>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">TSLA</span><span class="fname">Tesla</span><span class="price">$393,5</span><span class="chg down">▼ -7,5%</span></div>
+        <p class="ssum">Föll kraftigt trots ett starkt Q2 med rekordleveranser på 480 126 fordon som slog förväntningarna — ett klassiskt "sälj på nyheten"-mönster där investerare redan hade prisat in de goda siffrorna. <strong>Riktkurs (Börskollen):</strong> ~464 USD. <strong>Rekommendation:</strong> Blandad — Wedbush Köp (Outperform), Morgan Stanley Behåll (nedgraderad från övervikt).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">NVDA</span><span class="fname">Nvidia</span><span class="price">$194,8</span><span class="chg down">▼ -1,4%</span></div>
+        <p class="ssum">Fortsätter befästa sin AI-position genom nya intäktsdelningsavtal med AI-molnleverantörer och en strategisk allians med Palantir. Marknadsvärde cirka 4,7 biljoner dollar. <strong>Riktkurs (Börskollen):</strong> ~138 USD (notera: äldre riktkurser kan ligga kvar i snittet trots kraftig kursuppgång). <strong>Rekommendation (Affärsvärlden):</strong> Behåll/Neutral.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">AMD</span><span class="fname">AMD</span><span class="price">$517,8</span><span class="chg down">▼ -4,3%</span></div>
+        <p class="ssum">Handlas ned tillsammans med resten av halvledarsektorn. Marknadsvärde cirka 844 md dollar. <strong>Riktkurs (Börskollen):</strong> ~284 USD. <strong>Rekommendation (Börskollen):</strong> Köp (DBS Bank).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">PLTR</span><span class="fname">Palantir</span><span class="price">$129,8</span><span class="chg up">▲ +3,2%</span></div>
+        <p class="ssum">Steg efter en uppgradering från DA Davidson och nyheten om ett strategiskt samarbete med Nvidia kring AI-modeller. Marknadsvärde cirka 310 md dollar. <strong>Riktkurs (Börskollen):</strong> ~165 USD. <strong>Rekommendation:</strong> ingen tydlig konsensus hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">CRWD</span><span class="fname">CrowdStrike</span><span class="price">$194,0</span><span class="chg up">▲ +0,4%</span></div>
+        <p class="ssum">Viktigt att veta: kursen ser ut att ha "rasat" i vissa rubriker, men det beror på en genomförd aktiesplit 4-för-1, inte ett verkligt kursfall. Bolaget expanderar sitt AI-säkerhetssamarbete med AWS och namngavs som ledare i Forrester Wave för XDR-plattformar. <strong>Riktkurs (Börskollen):</strong> ~294 USD (notera: kan vara satt innan senaste splitten justerades in fullt ut). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">ASTS</span><span class="fname">AST SpaceMobile</span><span class="price">$86,5</span><span class="chg down">▼ -0,5%</span></div>
+        <p class="ssum">Har säkrat 926 miljoner dollar i japanskt statligt stöd för ett samriskbolag med Rakuten. FCC har även öppnat upp 800 MHz-spektrum för direkt telefon-till-satellit-anslutning, och bolaget har nyligen skjutit upp fler BlueBird-satelliter via SpaceX. <strong>Riktkurs/Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">SPCX</span><span class="fname">SpaceX</span><span class="price">$158,7</span><span class="chg up">▲ stabiliserande</span></div>
+        <p class="ssum">Börsnoterades 12 juni 2026 till 135 dollar/aktie — världens största börsnotering någonsin. Extremt volatil resa sedan dess (topp 226 dollar, botten 147 dollar). Wolfe Research inledde bevakning med köprekommendation. <strong>Riktkurs (Börskollen/Finwire):</strong> 175 USD (Wolfe Research). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="link-row" style="flex-wrap:wrap; gap:8px; display:flex;">
+        <a href="https://news.google.com/search?hl=sv-SE&gl=SE" target="_blank" rel="noopener" class="readmore">Google News ↗</a>
+        <a href="https://www.avanza.se" target="_blank" rel="noopener" class="readmore">Avanza ↗</a>
+        <a href="https://www.nordnet.se" target="_blank" rel="noopener" class="readmore">Nordnet ↗</a>
+        <a href="https://www.di.se" target="_blank" rel="noopener" class="readmore">Dagens Industri ↗</a>
+        <a href="https://www.placera.se" target="_blank" rel="noopener" class="readmore">Placera ↗</a>
+      </div>
+      <p style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono); margin-top:10px;">Kurser/nyheter sammanställt manuellt, inte live-uppdaterat. Riktkurser och rekommendationer (Köp/Behåll/Sälj) hämtade från Börskollen och Affärsvärlden.</p>
     </section>
   </section>
 
