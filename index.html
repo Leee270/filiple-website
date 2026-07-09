@@ -41,10 +41,10 @@
     position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border);
     transition:background var(--dur) ease, border-color var(--dur) ease;
   }
-  .nav-wrap{max-width:920px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
-  .brand{font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:.01em; text-decoration:none;}
-  [data-theme="dark"] .brand{font-family:var(--font-mono);}
-  nav{display:flex; gap:4px; flex-wrap:wrap;}
+  .nav-wrap{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:10px 24px; gap:20px;}
+  .brand{display:block; text-decoration:none; flex-shrink:0;}
+  .brand img{height:128px; width:auto; display:block;}
+  nav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;}
   nav button{
     background:none; border:none; font-family:inherit; font-size:14px; color:var(--text-muted);
     padding:8px 12px; border-radius:8px; cursor:pointer; transition:color .2s, background .2s;
@@ -52,6 +52,11 @@
   [data-theme="dark"] nav button{font-family:var(--font-mono); font-size:13px;}
   nav button:hover{color:var(--text); background:var(--accent-soft);}
   nav button.active{color:var(--accent); font-weight:600; background:var(--accent-soft);}
+  @media (max-width:700px){
+    .nav-wrap{flex-direction:column; align-items:flex-start; gap:10px; padding:14px 20px;}
+    .brand img{height:96px;}
+    nav{justify-content:flex-start;}
+  }
 
   main{max-width:720px; margin:0 auto; padding:64px 24px 120px;}
   .panel{display:none;}
@@ -190,7 +195,9 @@
 
 <header>
   <div class="nav-wrap">
-    <a class="brand" href="#" id="brandLink">Filip</a>
+    <a class="brand" href="#" id="brandLink">
+      <img src="data:image/png;base64,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ACGhCABASCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgAAIaEIAEBIKAIAEBKKAACE3lcfAKVddvyz3r78eR///LbD3xn9GT955md69O9Y+fcdKdO5++3PPXocVdXtvHydU+793371dS7ac767/jsgLaHIs/aeNC/BP+/xd9wKzt+O4Qxn/31HynbujhyfX01f5B8JsbNFc8qzf0anaxUeIhQBnvc1IDLGEsBLPKMIsI/LZucJaEYoAuxLMAJtCEWAY4hFoDyhCHAcsQiUJhQBjiUWgbKEIsDxxCJQklAEOIdYJGJckJpQhE++B4+jiQKumXdIzRduczaTIiud/esWqcX8BFfsKALc520TEt15MwBXhCLAY14NRjEClCEUAQAICUWA57gNDbQnFAEACAlFAABCQhEAgJDvUQSAf4s+mf72z7/3bCqjCEUA+HTr64suv/z3jxCblOHWMwAAITuKnO2MLxv2bp0z+OJsoD07igCPE4nACEIR4DGvRqIdb6AMt56BaewGAtzJjiIwyepItJsIlCIUAQAICUWAc9hNBMoRigDHE4lAST7MAnAskViL1wu+sKMIcBzRAZRmR5GzZV44V38ilj4yj3OAuwlFgP0IRKAVoQjwOoEItCQUAR4nDIERhCIwicADeIBPPQMAEBKKAACE3HqGes78Gh+3arlHpzG54muyXGekZUcR+InvlgQYTCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgCs5WuoSEsoAj/xRcBwPNcZafnNLDyr48T28TNdtnN+vk7n8OyfpdO5yyTjef24Hh+9LjP+LFCOHUX4zgIDebxd/SdwIqEIAEBIKAIAEBKKAACEhCIAACGhCABAKGMoXjZfPgoAsFyW71G8DkNfgwAAsFiWUBSGAADJZLz1DMQ8lgHAqbLsKAK/s/MOwKmEIgDAp1t3bka+WReKAABxII6Mw6+EIgDAp1txOPIbWoQiAMDv4TciDK/51DMAACGhCABASCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgAAIaEIAEBIKAIAEBKKAACEhCIAACGhCABASCgCsLfL6gMA9iEUAdiTSIRG3lcfAACtvK0+AGA/dhQBAAgJRQAAQkIRAICQUAQAICQUAQAICUUAAEJCEQCAkFAEACD0/xgYQIQhg8sGAAAAAElFTkSuQmCC" alt="Filip Le">
+    </a>
     <nav>
       <button data-panel="om" class="active">Om mig</button>
       <button data-panel="cyber">Cybersäkerhet</button>
@@ -297,6 +304,10 @@
         <div class="cert-title">GitHub-profil</div>
         <a href="https://github.com/Leee270" target="_blank" rel="noopener">github.com/Leee270 →</a>
       </div>
+      <div class="proj">
+        <div class="cert-title">TryHackMe-profil</div>
+        <a href="https://tryhackme.com/p/Leee270" target="_blank" rel="noopener">tryhackme.com/p/Leee270 →</a>
+      </div>
     </section>
   </section>
 
@@ -304,54 +315,54 @@
   <section class="panel" id="panel-aktier" data-theme="dark">
     <p class="eyebrow">Aktier</p>
     <h1>Aktier</h1>
-    <p class="lede">Bolag jag bevakar — kurser och nyheter sammanställda av mig (med hjälp av Claude), senast uppdaterat 9 juli 2026.</p>
+    <p class="lede">Bolag jag bevakar — kurser och nyheter sammanställda av mig (med hjälp av Claude), senast uppdaterat 3 juli 2026.</p>
 
     <div class="marquee-wrap"><div class="marquee">
-      <span class="mtick">ERIC-B<b>107,4</b><span class="mup">+2,1%</span></span>
-      <span class="mtick">INVE-B<b>397,9</b><span class="mdown">-1,2%</span></span>
-      <span class="mtick">VOLV-B<b>343,7</b><span class="mup">+0,3%</span></span>
-      <span class="mtick">SAAB-B<b>617,6</b><span class="mup">+5,1%</span></span>
-      <span class="mtick">TSLA<b>394,5</b><span class="mdown">-4,0%</span></span>
-      <span class="mtick">NVDA<b>196,9</b><span class="mup">+0,7%</span></span>
-      <span class="mtick">AMD<b>508,3</b><span class="mdown">-8,1%</span></span>
-      <span class="mtick">PLTR<b>134,2</b><span class="mdown">-0,1%</span></span>
-      <span class="mtick">CRWD<b>194,4</b><span class="mup">+1,3%</span></span>
-      <span class="mtick">ASTS<b>74,1</b><span class="mdown">-4,7%</span></span>
-      <span class="mtick">SPCX<b>149,5</b><span class="mdown">-6,8%</span></span>
-      <span class="mtick">ERIC-B<b>107,4</b><span class="mup">+2,1%</span></span>
-      <span class="mtick">INVE-B<b>397,9</b><span class="mdown">-1,2%</span></span>
-      <span class="mtick">VOLV-B<b>343,7</b><span class="mup">+0,3%</span></span>
-      <span class="mtick">SAAB-B<b>617,6</b><span class="mup">+5,1%</span></span>
-      <span class="mtick">TSLA<b>394,5</b><span class="mdown">-4,0%</span></span>
-      <span class="mtick">NVDA<b>196,9</b><span class="mup">+0,7%</span></span>
-      <span class="mtick">AMD<b>508,3</b><span class="mdown">-8,1%</span></span>
-      <span class="mtick">PLTR<b>134,2</b><span class="mdown">-0,1%</span></span>
-      <span class="mtick">CRWD<b>194,4</b><span class="mup">+1,3%</span></span>
-      <span class="mtick">ASTS<b>74,1</b><span class="mdown">-4,7%</span></span>
-      <span class="mtick">SPCX<b>149,5</b><span class="mdown">-6,8%</span></span>
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
     </div></div>
 
     <section class="block" style="margin-top:24px;">
       <h2>Svenska bolag</h2>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">ERIC B</span><span class="fname">Ericsson</span><span class="price">107,4 SEK</span><span class="chg up">▲ +2,1%</span></div>
-        <p class="ssum">Ericsson rapporterar Q2 den 14 juli — sannolikt Börje Ekholms sista kvartalsrapport som vd innan Per Narvinger tar över 1 oktober. Bolaget har även inlett rättsliga åtgärder mot Transsion för påstått patentintrång kring 4G/5G. <strong>Riktkurs (Börskollen):</strong> ~103 kr. <strong>Rekommendation:</strong> Blandad — Handelsbanken/Nordea Köp, Goldman Sachs/Barclays Sälj.</p>
+        <div class="scard-head"><span class="sym">ERIC B</span><span class="fname">Ericsson</span><span class="price">112,0 SEK</span><span class="chg down">▼ -1,8%</span></div>
+        <p class="ssum">Störst nyhet just nu: Per Narvinger tar över som vd och koncernchef 1 oktober 2026 efter Börje Ekholm. Ericsson har även inlett rättsliga åtgärder mot Transsion för påstått patentintrång kring 4G/5G. <strong>Riktkurs (Börskollen):</strong> ~103 kr. <strong>Rekommendation:</strong> Blandad — Handelsbanken/Nordea Köp, Goldman Sachs Sälj.</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">INVE B</span><span class="fname">Investor</span><span class="price">397,9 SEK</span><span class="chg down">▼ -1,2%</span></div>
-        <p class="ssum">Investmentbolaget bakom bland annat ABB, AstraZeneca, Ericsson och Saab. Bolaget bjöd nyligen in till webbsändning av sin Q2-rapport, som väntas ge en uppdaterad bild av substansvärdet efter en stark inledning på 2026. <strong>Riktkurs (Börskollen):</strong> ~382 kr (SEB har nyligen höjt till 409 kr). <strong>Rekommendation:</strong> Blandad — Börskollen: SEB Behåll. Affärsvärlden: övervägande Köp (Kepler Cheuvreux, DNB), Pareto Behåll.</p>
+        <div class="scard-head"><span class="sym">INVE B</span><span class="fname">Investor</span><span class="price">~380 SEK</span><span class="chg up">▲ stigande trend</span></div>
+        <p class="ssum">Investmentbolaget bakom bland annat ABB, AstraZeneca, Ericsson och Saab. Aktien ligger i en stigande trendkanal med stöd kring 373 kr. Senaste kvartalsrapporten (Q3, rapporterad 22 jan 2026) visade omsättning på 71,3 md SEK och vinst på 55,4 md SEK. <strong>Riktkurs (Börskollen):</strong> ~382 kr. <strong>Rekommendation:</strong> Blandad — SEB Behåll, DNB Carnegie Köp.</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">VOLV B</span><span class="fname">Volvo</span><span class="price">343,7 SEK</span><span class="chg up">▲ +0,3%</span></div>
-        <p class="ssum">Orderingången för tunga lastbilar (klass 8) i Nordamerika steg kraftigt i juni, +231% jämfört med samma månad föregående år — ett positivt tecken inför Volvos Q2-rapport 17 juli. <strong>Riktkurs (Börskollen):</strong> ~353 kr. <strong>Rekommendation:</strong> Blandad med övervikt mot Köp — Börskollen Köp, Affärsvärlden: Pareto/Goldman Sachs Köp, Barclays Undervikt.</p>
+        <div class="scard-head"><span class="sym">VOLV B</span><span class="fname">Volvo</span><span class="price">338,6 SEK</span><span class="chg up">▲ +1,9%</span></div>
+        <p class="ssum">Lastbilstillverkaren steg nästan 2% senaste dagen. Bolaget har tidigare fallit ~3% efter sin Capital Markets Day, men siktar på nästan 3 md USD i intäkter från autonom transport. <strong>Riktkurs (Börskollen):</strong> ~353 kr. <strong>Rekommendation (Affärsvärlden/Placera):</strong> Köp (konsensus övervikt, 64% positiva rekommendationer).</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">SAAB B</span><span class="fname">Saab</span><span class="price">617,6 SEK</span><span class="chg up">▲ +5,1%</span></div>
-        <p class="ssum">Osannolik vecka: Polen tecknade avtal om tre ubåtar för 47 md kr, Ukraina beställde 16 Gripen E-plan för 24,6 md kr, och uppgifter om att Nato är nära att köpa spaningsflygplanet GlobalEye har fått aktien att rusa runt 18–20% på en vecka. <strong>Riktkurs (Börskollen):</strong> ~610 kr (mycket stor spridning, 310–780 kr). <strong>Rekommendation:</strong> Blandad — Börskollen Köp (UBS mest optimistisk), Affärsvärlden blandat (SEB Behåll, BofA/UBS Köp, Kepler Cheuvreux Sälj).</p>
+        <div class="scard-head"><span class="sym">SAAB B</span><span class="fname">Saab</span><span class="price">519,5 SEK</span><span class="chg up">▲ +3,3%</span></div>
+        <p class="ssum">Starkt Q1 2026 med 23,6% organisk försäljningstillväxt. Aktien har fått extra skjuts av uppgifter om att NATO planerar ersätta en flotta med Saab-produkter, samt att Polen valt Saabs Kockums som leverantör av nästa generations ubåtar. <strong>Riktkurs (Börskollen):</strong> ~610 kr. <strong>Rekommendation (Börskollen):</strong> Köp (bl.a. SEB, Danske Bank, Pareto Securities).</p>
       </div>
     </section>
 
@@ -359,38 +370,38 @@
       <h2>Globala bolag</h2>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">TSLA</span><span class="fname">Tesla</span><span class="price">$394,5</span><span class="chg down">▼ -4,0%</span></div>
-        <p class="ssum">Trots rekordleveranser i Q2 (cirka 480 000 fordon, +25%) och lansering av förarlös robotaxitjänst i Miami 3 juli föll aktien kraftigt — ett klassiskt "sälj på nyheten"-mönster. Amerikanska myndigheter avslutade även en tvåårig säkerhetsutredning om oväntade bromsningar utan att hitta någon betydande risk. <strong>Riktkurs (Börskollen):</strong> ~464 USD. <strong>Rekommendation:</strong> Blandad — Wedbush/Mizuho Köp, Barclays Behåll, JPMorgan Sälj.</p>
+        <div class="scard-head"><span class="sym">TSLA</span><span class="fname">Tesla</span><span class="price">$393,5</span><span class="chg down">▼ -7,5%</span></div>
+        <p class="ssum">Föll kraftigt trots ett starkt Q2 med rekordleveranser på 480 126 fordon som slog förväntningarna — ett klassiskt "sälj på nyheten"-mönster där investerare redan hade prisat in de goda siffrorna. <strong>Riktkurs (Börskollen):</strong> ~464 USD. <strong>Rekommendation:</strong> Blandad — Wedbush Köp (Outperform), Morgan Stanley Behåll (nedgraderad från övervikt).</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">NVDA</span><span class="fname">Nvidia</span><span class="price">$196,9</span><span class="chg up">▲ +0,7%</span></div>
-        <p class="ssum">Rapporter om att Nvidias kommande AI-serverrack "Kyber" skulle vara försenat till 2028 skickade tillfälligt ner tech-aktier i Asien, men Nvidia dementerade snabbt och sa att tidsplanen ligger fast. Aktien handlas ändå fortsatt ned cirka 18% från junitoppen. <strong>Riktkurs (Börskollen):</strong> ~138 USD (notera: äldre riktkurser kan ligga kvar i snittet trots kraftig kursuppgång). <strong>Rekommendation:</strong> Övervägande Köp enligt flera analyshus (HSBC, Baird, Barclays) — ingen aktuell sammanställd rekommendation hittad hos Affärsvärlden.</p>
+        <div class="scard-head"><span class="sym">NVDA</span><span class="fname">Nvidia</span><span class="price">$194,8</span><span class="chg down">▼ -1,4%</span></div>
+        <p class="ssum">Fortsätter befästa sin AI-position genom nya intäktsdelningsavtal med AI-molnleverantörer och en strategisk allians med Palantir. Marknadsvärde cirka 4,7 biljoner dollar. <strong>Riktkurs (Börskollen):</strong> ~138 USD (notera: äldre riktkurser kan ligga kvar i snittet trots kraftig kursuppgång). <strong>Rekommendation (Affärsvärlden):</strong> Behåll/Neutral.</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">AMD</span><span class="fname">AMD</span><span class="price">$508,3</span><span class="chg down">▼ -8,1%</span></div>
-        <p class="ssum">Goldman Sachs höjde nyligen sin riktkurs för AMD till 640 dollar (från 450) och upprepade Köp, med hänvisning till stark efterfrågan på EPYC-processorer — men aktien pressades ändå kraftigt av en bred säljvåg i halvledarsektorn under veckan. <strong>Riktkurs (Börskollen):</strong> ~284 USD. <strong>Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden.</p>
+        <div class="scard-head"><span class="sym">AMD</span><span class="fname">AMD</span><span class="price">$517,8</span><span class="chg down">▼ -4,3%</span></div>
+        <p class="ssum">Handlas ned tillsammans med resten av halvledarsektorn. Marknadsvärde cirka 844 md dollar. <strong>Riktkurs (Börskollen):</strong> ~284 USD. <strong>Rekommendation (Börskollen):</strong> Köp (DBS Bank).</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">PLTR</span><span class="fname">Palantir</span><span class="price">$134,2</span><span class="chg down">▼ -0,1%</span></div>
-        <p class="ssum">Stark vecka med sex dagars sammanhängande uppgång (cirka +24%) och börsvärde som passerat 300 md dollar, drivet av ett nytt AI-partnerskap med Nvidia. D.A. Davidson höjde den 2 juli sin rekommendation till Köp. <strong>Riktkurs (Börskollen):</strong> ~165 USD. <strong>Rekommendation:</strong> ingen aktuell sammanställd rekommendation hittad hos Börskollen/Affärsvärlden.</p>
+        <div class="scard-head"><span class="sym">PLTR</span><span class="fname">Palantir</span><span class="price">$129,8</span><span class="chg up">▲ +3,2%</span></div>
+        <p class="ssum">Steg efter en uppgradering från DA Davidson och nyheten om ett strategiskt samarbete med Nvidia kring AI-modeller. Marknadsvärde cirka 310 md dollar. <strong>Riktkurs (Börskollen):</strong> ~165 USD. <strong>Rekommendation:</strong> ingen tydlig konsensus hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">CRWD</span><span class="fname">CrowdStrike</span><span class="price">$194,4</span><span class="chg up">▲ +1,3%</span></div>
-        <p class="ssum">CrowdStrike genomförde en aktiesplit 4-för-1 den 2 juli, vilket sänkte kursen från cirka 770 dollar till dagens nivå utan att påverka bolagets faktiska värde. Flera analytiker har höjt sina riktkurser den senaste veckan trots fortsatt värderingsoro. <strong>Riktkurs (Börskollen):</strong> ~294 USD (notera: split-justeringen är fortsatt osäker i underlaget). <strong>Rekommendation:</strong> ingen aktuell sammanställd rekommendation hittad hos Börskollen/Affärsvärlden.</p>
+        <div class="scard-head"><span class="sym">CRWD</span><span class="fname">CrowdStrike</span><span class="price">$194,0</span><span class="chg up">▲ +0,4%</span></div>
+        <p class="ssum">Viktigt att veta: kursen ser ut att ha "rasat" i vissa rubriker, men det beror på en genomförd aktiesplit 4-för-1, inte ett verkligt kursfall. Bolaget expanderar sitt AI-säkerhetssamarbete med AWS och namngavs som ledare i Forrester Wave för XDR-plattformar. <strong>Riktkurs (Börskollen):</strong> ~294 USD (notera: kan vara satt innan senaste splitten justerades in fullt ut). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">ASTS</span><span class="fname">AST SpaceMobile</span><span class="price">$74,1</span><span class="chg down">▼ -4,7%</span></div>
-        <p class="ssum">Förbereder uppskjutning av ytterligare tre BlueBird-satelliter (11–13) från Cape Canaveral i början av augusti, efter att de tre som sköts upp i juni nu är i drift. Bolaget har tillsammans med Vodafone Irland visat att katastrofkommunikation via satelliterna fungerar när marknäten är nere. <strong>Riktkurs/Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden.</p>
+        <div class="scard-head"><span class="sym">ASTS</span><span class="fname">AST SpaceMobile</span><span class="price">$86,5</span><span class="chg down">▼ -0,5%</span></div>
+        <p class="ssum">Har säkrat 926 miljoner dollar i japanskt statligt stöd för ett samriskbolag med Rakuten. FCC har även öppnat upp 800 MHz-spektrum för direkt telefon-till-satellit-anslutning, och bolaget har nyligen skjutit upp fler BlueBird-satelliter via SpaceX. <strong>Riktkurs/Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
       </div>
 
       <div class="scard-full">
-        <div class="scard-head"><span class="sym">SPCX</span><span class="fname">SpaceX</span><span class="price">$149,5</span><span class="chg down">▼ -6,8%</span></div>
-        <p class="ssum">Togs in i Nasdaq-100-indexet den 7 juli, vilket tvingade indexfonder att köpa aktier för miljardbelopp — men kursen föll ändå i ett klassiskt "sälj på nyheten"-mönster. Samma dag löpte investmentbankernas tysta period ut, och flera storbanker inledde bevakning med övervägande köpråd. <strong>Riktkurs (Börskollen):</strong> ~226 USD (snitt Goldman Sachs, UBS, Stifel, RBC, Morgan Stanley). <strong>Rekommendation (Börskollen):</strong> Köp (samtliga fem storbanker positiva).</p>
+        <div class="scard-head"><span class="sym">SPCX</span><span class="fname">SpaceX</span><span class="price">$158,7</span><span class="chg up">▲ stabiliserande</span></div>
+        <p class="ssum">Börsnoterades 12 juni 2026 till 135 dollar/aktie — världens största börsnotering någonsin. Extremt volatil resa sedan dess (topp 226 dollar, botten 147 dollar). Wolfe Research inledde bevakning med köprekommendation. <strong>Riktkurs (Börskollen/Finwire):</strong> 175 USD (Wolfe Research). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
       </div>
     </section>
 
@@ -443,7 +454,10 @@
     {q:"Hur fungerar HTTP och HTTPS?", a:`<p>HTTP (HyperText Transfer Protocol) är språket en webbläsare (<strong>klienten</strong>) och en webbserver (<strong>servern</strong>) använder för att prata med varandra. Klienten skickar en <strong>request</strong> ("kan jag få den här sidan?") och servern svarar med en <strong>response</strong> (sidans innehåll, eller ett felmeddelande om något gick fel). HTTPS är samma sak, fast krypterat — S:et står för Secure — så att ingen som avlyssnar trafiken kan läsa vad som skickas.</p>`},
     {q:"Vad är en IP-adress?", a:`<p>En IP-adress är en unik "adress" som varje enhet på internet får, ungefär som ett personnummer. Den gör att data vet exakt vart den ska skickas och varifrån den kommer. Det finns två versioner i bruk idag — IPv4 (t.ex. 192.168.1.1) och det nyare IPv6.</p>`},
     {q:"Vad är ett domännamn och DNS?", a:`<p>När du skriver "youtube.com" i webbläsaren är det egentligen inte det sidan "heter" i teknisk mening — bakom kulisserna pekar det namnet mot en specifik IP-adress, ungefär som ett personnummer pekar ut en specifik person. IP-adresser är opraktiska för människor att komma ihåg — därför använder vi domännamn istället, som fungerar som en telefonkatalog: du slår upp ett namn du minns, och katalogen (DNS) hittar rätt "nummer" åt dig.</p>`},
-    {q:"Vad är DNS?", a:`<p>DNS (Domain Name System) är själva systemet/katalogen som gör kopplingen mellan domännamn och IP-adresser i praktiken. När du skriver in en adress skickas en fråga till en DNS-server, som slår upp vilken IP-adress namnet hör till och skickar tillbaka svaret — på någon bråkdel av en sekund. Utan DNS skulle du behöva skriva in siffror istället för namn varje gång.</p>`},
+    {q:"Vad är DNS?", a:`<p>DNS står för Domain Name System och fungerar som internets telefonbok — eller enklare, en kontaktlista.</p>
+      <p>Tänk dig att du vill ringa en kompis. Oftast skriver du inte in kompisens telefonnummer, utan letar upp namnet bland dina kontakter och ringer. Mobilen hittar rätt nummer åt dig utan att du märker det, eftersom numret är sparat under ett namn.</p>
+      <p>DNS fungerar på samma sätt. När du skriver <code>google.com</code> i webbläsaren skickar din dator en fråga till en DNS-server: "Vilken IP-adress har google.com?" DNS-servern letar upp rätt IP-adress och skickar tillbaka den till din dator, som sedan kan hitta Googles server och ladda webbplatsen.</p>
+      <p>Du ser fortfarande <code>google.com</code> i webbläsaren, men i bakgrunden använder datorn IP-adressen som DNS hittade. Domännamn (ex. Google.com) är till för människor. IP-adresser är till för datorer. DNS är tjänsten som översätter mellan dem.</p>`},
   ];
   const FAQ3 = [
     {q:"Vad är IPv4?", a:`<p>IPv4 är den äldre och fortfarande mest använda versionen av IP-adresser. Den skrivs som fyra tal mellan 0–255 (t.ex. 192.168.1.1) och ger cirka 4,3 miljarder unika adresser — därför håller det nyare IPv6 gradvis på att ta över.</p>`},
