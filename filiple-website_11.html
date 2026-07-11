@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filip Le — Nätverk, infrastruktur & digital säkerhet</title>
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#FFFFFF; --surface:#FBFBFC; --text:#14181F; --text-muted:#5B6472;
+    --accent:#1F3A8F; --accent-soft:#E7ECFA; --border:#E3E6EB;
+    --font-display:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+    --dur:.5s;
+  }
+  [data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#0B0F17; --surface:#121826; --text:#E7ECF5; --text-muted:#8792A6;
+    --accent:#5B8CFF; --accent-soft:#1B2440; --border:#232B3D;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background-color:var(--bg); color:var(--text); font-family:var(--font-body);
+    transition:background-color var(--dur) ease, color var(--dur) ease;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+
+  .flash{position:fixed; inset:0; background:var(--accent); opacity:0; pointer-events:none; z-index:999; transition:opacity .18s ease;}
+  .flash.on{opacity:.12;}
+
+  header{
+    position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border);
+    transition:background var(--dur) ease, border-color var(--dur) ease;
+  }
+  .nav-wrap{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:10px 24px; gap:20px;}
+  .brand{display:block; text-decoration:none; flex-shrink:0;}
+  .brand img{height:128px; width:auto; display:block;}
+  nav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;}
+  nav button{
+    background:none; border:none; font-family:inherit; font-size:14px; color:var(--text-muted);
+    padding:8px 12px; border-radius:8px; cursor:pointer; transition:color .2s, background .2s;
+  }
+  [data-theme="dark"] nav button{font-family:var(--font-mono); font-size:13px;}
+  nav button:hover{color:var(--text); background:var(--accent-soft);}
+  nav button.active{color:var(--accent); font-weight:600; background:var(--accent-soft);}
+  @media (max-width:700px){
+    .nav-wrap{flex-direction:column; align-items:flex-start; gap:10px; padding:14px 20px;}
+    .brand img{height:96px;}
+    nav{justify-content:flex-start;}
+  }
+
+  main{max-width:720px; margin:0 auto; padding:64px 24px 120px;}
+  .panel{display:none;}
+  .panel.active{display:block; animation:rise .5s ease both;}
+  @keyframes rise{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 10px;}
+  h1{font-family:var(--font-display); font-size:clamp(28px,4vw,40px); line-height:1.15; margin:0 0 14px; font-weight:700;}
+  [data-theme="dark"] h1{font-family:var(--font-mono); font-size:clamp(22px,3.4vw,32px);}
+  h2{font-family:var(--font-display); font-size:22px; margin:0 0 18px; font-weight:600;}
+  [data-theme="dark"] h2{font-family:var(--font-mono); font-size:19px;}
+  p{line-height:1.65; color:var(--text-muted); margin:0 0 16px;}
+  .lede{font-size:17px; color:var(--text); max-width:52ch;}
+  section.block{margin-top:56px;}
+
+  /* Om mig */
+  .roadmap{border-left:2px solid var(--border); padding-left:0; margin:0; list-style:none;}
+  .roadmap li{position:relative; padding:0 0 26px 26px; border-left:2px solid var(--border); margin-left:0;}
+  .roadmap li:last-child{border-color:transparent; padding-bottom:0;}
+  .roadmap li::before{content:''; position:absolute; left:-7px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--surface); border:2px solid var(--accent);}
+  .roadmap .when{font-family:var(--font-mono); font-size:12px; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px;}
+  .roadmap .what{font-weight:500;}
+
+  /* Terminal intro */
+  .terminal{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    font-family:var(--font-mono); font-size:13.5px; padding:20px 22px; color:var(--text); line-height:1.8;
+  }
+  .terminal .muted{color:var(--text-muted);}
+  .terminal .accent{color:var(--accent);}
+
+  /* Cards */
+  .cert, .proj{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:12px;
+  }
+  .cert a, .proj a{color:var(--accent); text-decoration:none; font-weight:500; font-size:13px;}
+  .cert a:hover, .proj a:hover{text-decoration:underline;}
+  .cert-title{font-weight:600; margin-bottom:2px; font-size:14.5px;}
+  .cert-sub{font-family:var(--font-mono); font-size:11.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em;}
+
+  .empty{border:1px dashed var(--border); border-radius:10px; padding:24px; color:var(--text-muted); font-size:14px; font-family:var(--font-mono);}
+
+  .skills{list-style:none; padding:0; margin:0; display:grid; gap:8px;}
+  .skills li{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:13px; padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px;}
+  .skills .status{color:var(--accent);}
+
+  /* FAQ accordion */
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; color:var(--text); cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:16px 2px; font-size:15px; font-weight:500; font-family:inherit;
+  }
+  [data-theme="dark"] .faq-q{font-family:var(--font-mono); font-size:13.5px;}
+  .chev{font-family:var(--font-mono); color:var(--accent); transition:transform .25s ease; flex:none;}
+  .faq-item.open .chev{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a-inner{padding:0 2px 18px; color:var(--text-muted); font-size:14.5px; line-height:1.7;}
+  .faq-a-inner p{color:inherit; margin:0 0 12px;}
+  .faq-a-inner ul, .faq-a-inner ol{margin:0 0 12px; padding-left:20px;}
+  .faq-group-label{font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); margin:32px 0 4px;}
+  .faq-group-label:first-child{margin-top:0;}
+
+  /* Contact */
+  .contact-list{list-style:none; padding:0; margin:0; display:grid; gap:10px; max-width:360px;}
+  .contact-list a{
+    display:flex; align-items:center; gap:10px; padding:14px 16px; border:1px solid var(--border);
+    border-radius:10px; text-decoration:none; color:var(--text); font-size:14.5px; font-weight:500;
+    transition:border-color .2s, background .2s;
+  }
+  .contact-list a svg{flex-shrink:0;}
+  .contact-list a:hover{border-color:var(--accent); background:var(--accent-soft);}
+  .contact-list a[href^="mailto"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .contact-list a[href^="mailto"]:hover{opacity:.9; background:var(--accent);}
+
+  /* Aktier */
+  .marquee-wrap{border:1px solid var(--border); border-radius:10px; background:var(--surface); overflow:hidden; white-space:nowrap; padding:10px 0; margin-bottom:8px;}
+  .marquee{display:inline-flex; gap:32px; font-family:var(--font-mono); font-size:12.5px; animation:mscroll 32s linear infinite; padding-left:100%;}
+  @keyframes mscroll{ from{transform:translateX(0);} to{transform:translateX(-100%);} }
+  .mtick{color:var(--text-muted);}
+  .mtick b{color:var(--text); margin:0 6px;}
+  .mtick .mup{color:#4FBF83;} .mtick .mdown{color:#E2574C;}
+
+  .setup{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; font-size:13.5px;}
+  .setup label{display:block; font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.05em;}
+  .setup input{width:100%; max-width:360px; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:9px 12px; border-radius:6px; font-family:var(--font-mono); font-size:13px;}
+  .setup input:focus{border-color:var(--accent); outline:none;}
+  .setup .btnrow{display:flex; gap:10px; margin-top:10px; align-items:center; flex-wrap:wrap;}
+  .setup button{background:var(--accent); color:var(--bg); border:none; padding:9px 16px; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer; font-family:var(--font-body);}
+  .setup button:hover{opacity:.9;}
+  .setup .hint{color:var(--text-muted); font-size:12.5px;}
+  .setup .hint a{color:var(--accent);}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+  .scard{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px; cursor:pointer; text-align:left; color:inherit; font-family:inherit; width:100%; transition:border-color .15s;}
+  .scard:hover, .scard.active{border-color:var(--accent);}
+  .scard .sym{font-family:var(--font-mono); font-weight:700; font-size:13px;}
+  .scard .name{color:var(--text-muted); font-size:11.5px; margin:2px 0 8px;}
+  .scard .price{font-family:var(--font-mono); font-size:17px; font-weight:500;}
+  .scard .chg{font-family:var(--font-mono); font-size:12px; margin-top:2px;}
+  .scard .chg.up{color:#4FBF83;} .scard .chg.down{color:#E2574C;} .scard .chg.flat{color:var(--text-muted);}
+  .scard .loading{color:var(--text-muted); font-size:11.5px; font-family:var(--font-mono);}
+
+  .detail{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:20px;}
+  .detail-head{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .detail-head .sym{font-family:var(--font-mono); font-size:20px; font-weight:700;}
+  .detail-price{font-family:var(--font-mono); font-size:26px; font-weight:500;}
+  .stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(90px,1fr)); gap:10px; margin:14px 0; font-family:var(--font-mono); font-size:12px;}
+  .stat{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 10px;}
+  .stat .k{color:var(--text-muted); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em;}
+  .rec-bar{display:flex; height:10px; border-radius:5px; overflow:hidden; margin:6px 0 4px; background:var(--bg);}
+  .rec-legend{display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--text-muted); font-family:var(--font-mono);}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:4px;}
+  .snews{list-style:none; padding:0; margin:0;}
+  .snews li{background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px 14px; margin-bottom:8px; transition:border-color .15s;}
+  .snews li:hover{border-color:var(--accent);}
+  .snews a{color:var(--text); text-decoration:none; font-size:13.5px; font-weight:500; display:block; margin-bottom:5px;}
+  .snews a:hover{color:var(--accent);}
+  .snews-meta{display:inline-block; color:var(--accent); font-size:10.5px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.04em; background:var(--accent-soft); padding:2px 8px; border-radius:4px; margin-bottom:6px;}
+  .snews-sum{color:var(--text-muted); font-size:12.5px; margin-top:4px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .readmore{display:inline-flex; align-items:center; gap:6px; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:7px 12px; font-size:12px; font-family:var(--font-mono); text-decoration:none; color:var(--text); cursor:pointer;}
+  .readmore:hover{border-color:var(--accent); color:var(--accent);}
+
+  .quiz-card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px;}
+  .quiz-progress{font-family:var(--font-mono); font-size:11.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px;}
+  .quiz-q{font-size:17px; font-weight:600; margin-bottom:18px; line-height:1.4;}
+  .quiz-options{display:grid; gap:10px;}
+  .quiz-opt{
+    display:flex; align-items:center; gap:12px; text-align:left; width:100%;
+    background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:13px 16px;
+    color:var(--text); font-size:14px; font-family:inherit; cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .quiz-opt:hover:not(:disabled){border-color:var(--accent);}
+  .quiz-opt .letter{font-family:var(--font-mono); color:var(--accent); font-weight:700; flex-shrink:0;}
+  .quiz-opt.correct{border-color:#4FBF83; background:rgba(79,191,131,.12);}
+  .quiz-opt.wrong{border-color:#E2574C; background:rgba(226,87,76,.12);}
+  .quiz-opt:disabled{cursor:default; opacity:.75;}
+  .quiz-next{margin-top:18px; background:var(--accent); color:var(--bg); border:none; padding:10px 18px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; display:none;}
+  .quiz-result{text-align:center; padding:20px 0;}
+  .quiz-result .score{font-family:var(--font-mono); font-size:36px; font-weight:700; color:var(--accent); margin-bottom:8px;}
+  .quiz-result p{color:var(--text-muted); margin-bottom:20px;}
+  .quiz-close{background:none; border:1px solid var(--border); color:var(--text-muted); padding:9px 16px; border-radius:8px; font-size:12.5px; cursor:pointer; margin-left:8px;}
+  .scard-full{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:12px;}
+  .scard-head{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px;}
+  .scard-head .sym{font-family:var(--font-mono); font-weight:700; font-size:14px;}
+  .scard-head .fname{color:var(--text-muted); font-size:13px;}
+  .scard-head .price{font-family:var(--font-mono); font-size:15px; font-weight:500; margin-left:auto;}
+  .scard-head .chg{font-family:var(--font-mono); font-size:12.5px;}
+  .scard-head .chg.up{color:#4FBF83;} .scard-head .chg.down{color:#E2574C;}
+  .ssum{font-size:13.5px; margin:0;}
+
+  footer{max-width:720px; margin:0 auto; padding:0 24px 60px; color:var(--text-muted); font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+
+<header>
+  <div class="nav-wrap">
+    <a class="brand" href="#" id="brandLink">
+      <img src="data:image/png;base64,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ACGhCABASCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgAAIaEIAEBIKAIAEBKKAACE3lcfAKVddvyz3r78eR///LbD3xn9GT955md69O9Y+fcdKdO5++3PPXocVdXtvHydU+793371dS7ac767/jsgLaHIs/aeNC/BP+/xd9wKzt+O4Qxn/31HynbujhyfX01f5B8JsbNFc8qzf0anaxUeIhQBnvc1IDLGEsBLPKMIsI/LZucJaEYoAuxLMAJtCEWAY4hFoDyhCHAcsQiUJhQBjiUWgbKEIsDxxCJQklAEOIdYJGJckJpQhE++B4+jiQKumXdIzRduczaTIiud/esWqcX8BFfsKALc520TEt15MwBXhCLAY14NRjEClCEUAQAICUWA57gNDbQnFAEACAlFAABCQhEAgJDvUQSAf4s+mf72z7/3bCqjCEUA+HTr64suv/z3jxCblOHWMwAAITuKnO2MLxv2bp0z+OJsoD07igCPE4nACEIR4DGvRqIdb6AMt56BaewGAtzJjiIwyepItJsIlCIUAQAICUWAc9hNBMoRigDHE4lAST7MAnAskViL1wu+sKMIcBzRAZRmR5GzZV44V38ilj4yj3OAuwlFgP0IRKAVoQjwOoEItCQUAR4nDIERhCIwicADeIBPPQMAEBKKAACE3HqGes78Gh+3arlHpzG54muyXGekZUcR+InvlgQYTCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgCs5WuoSEsoAj/xRcBwPNcZafnNLDyr48T28TNdtnN+vk7n8OyfpdO5yyTjef24Hh+9LjP+LFCOHUX4zgIDebxd/SdwIqEIAEBIKAIAEBKKAACEhCIAACGhCABAKGMoXjZfPgoAsFyW71G8DkNfgwAAsFiWUBSGAADJZLz1DMQ8lgHAqbLsKAK/s/MOwKmEIgDAp1t3bka+WReKAABxII6Mw6+EIgDAp1txOPIbWoQiAMDv4TciDK/51DMAACGhCABASCgCABASigAAhIQiAAAhoQgAQEgoAgAQEooAAISEIgAAIaEIAEBIKAIAEBKKAACEhCIAACGhCABASCgCsLfL6gMA9iEUAdiTSIRG3lcfAACtvK0+AGA/dhQBAAgJRQAAQkIRAICQUAQAICQUAQAICUUAAEJCEQCAkFAEACD0/xgYQIQhg8sGAAAAAElFTkSuQmCC" alt="Filip Le">
+    </a>
+    <nav>
+      <button data-panel="om" class="active" data-i18n="nav_om">Om mig</button>
+      <button data-panel="cyber" data-i18n="nav_cyber">Cybersäkerhet</button>
+      <button data-panel="lardig" data-i18n="nav_lardig">Lär dig</button>
+      <button data-panel="github" data-i18n="nav_github">GitHub</button>
+      <button data-panel="aktier" data-i18n="nav_aktier">Aktier</button>
+      <button data-panel="kontakt" data-i18n="nav_kontakt">Kontakt</button>
+    </nav>
+    <button id="langToggle" class="readmore" style="margin-left:6px;">EN</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- OM MIG -->
+  <section class="panel active" id="panel-om" data-theme="light">
+    <p class="eyebrow" data-i18n="om_eyebrow">Portfolio & CV</p>
+    <h1>Filip Le</h1>
+    <p class="lede" data-i18n="om_lede">Bygger min kompetens inom nätverk, digital infrastruktur och IT-säkerhet — nyfiken på hur system hänger ihop och hur de skyddas, med målet att hitta min plats inom branschen efter examen.</p>
+
+    <section class="block">
+      <h2 data-i18n="om_h2">Om mig</h2>
+      <p data-i18n="om_p">Jag blev intresserad av cybersäkerhet när jag upptäckte hur mycket som händer bakom kulisserna på internet. Sedan dess har jag fastnat för att lära mig hur system fungerar, bygga egna projekt och ständigt utveckla mina tekniska kunskaper. Jag motiveras av att lösa problem och utmana mig själv, både inom teknik och i vardagen. När jag inte sitter vid datorn tränar jag, är sportintresserad (framför allt fotboll och ishockey), och följer gärna börsen och mina investeringar.</p>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="om_resan_h2">Resan</h2>
+      <ul class="roadmap">
+        <li><span class="when" data-i18n="road1_when">Nu</span><span class="what" data-i18n="road1_what">Förbereder mig på egen hand — grunder i nätverk, Linux och cybersäkerhet</span></li>
+        <li><span class="when" data-i18n="road2_when">Höstterminen 2026</span><span class="what" data-i18n="road2_what">Börjar studera nätverk, digital infrastruktur & cybersäkerhet på JU</span></li>
+        <li><span class="when" data-i18n="road3_when">Under studierna</span><span class="what" data-i18n="road3_what">Certifieringar, hemmalabb och praktiska projekt, dokumenterade här och på GitHub</span></li>
+        <li><span class="when" data-i18n="road4_when">Mål</span><span class="what" data-i18n="road4_what">Bygga en karriär inom cybersäkerhet och digital infrastruktur efter examen</span></li>
+      </ul>
+    </section>
+  </section>
+
+  <!-- CYBERSÄKERHET -->
+  <section class="panel" id="panel-cyber" data-theme="dark">
+    <p class="eyebrow" data-i18n="nav_cyber">Cybersäkerhet</p>
+
+    <section class="block">
+      <h2 data-i18n="cyber_certs_h2">Certifieringar</h2>
+      <div class="cert">
+        <div class="cert-sub" data-i18n="ms_learn">Microsoft Learn</div>
+        <div class="cert-title" data-i18n="cert1_title">Beskriv grundläggande cybersäkerhetshot, attacker och riskreducering</div>
+        <a href="https://learn.microsoft.com/api/achievements/share/sv-se/Leee270/VS56RWSM?sharingId=5BA1246BC22E5972" target="_blank" rel="noopener" data-i18n="see_achievement">Se achievement →</a>
+      </div>
+      <div class="cert">
+        <div class="cert-sub" data-i18n="ms_learn">Microsoft Learn</div>
+        <div class="cert-title" data-i18n="cert2_title">Beskriva nätverksbaserade hot och åtgärder</div>
+        <a href="https://learn.microsoft.com/api/achievements/share/sv-se/Leee270/BU3N9EED?sharingId=5BA1246BC22E5972" target="_blank" rel="noopener" data-i18n="see_achievement">Se achievement →</a>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="stack_h2">Kunskapsstack</h2>
+      <ul class="skills">
+        <li><span data-i18n="skill1">Nätverk, infrastruktur & cybersäkerhet (JU)</span><span class="status" data-i18n="skill1_status">påbörjas HT 2026</span></li>
+        <li><span>Linux</span><span class="status" data-i18n="status_ongoing">pågår</span></li>
+        <li><span>Python</span><span class="status" data-i18n="status_ongoing">pågår</span></li>
+      </ul>
+    </section>
+  </section>
+
+  <!-- LÄR DIG -->
+  <section class="panel" id="panel-lardig" data-theme="dark">
+    <p class="eyebrow" data-i18n="nav_lardig">Lär dig</p>
+    <h1 data-i18n="nav_lardig">Lär dig</h1>
+    <p class="lede" data-i18n="lardig_lede">Grunderna innan man går in i cybervärlden — skrivet både som mina egna anteckningar och för dig som är nyfiken.</p>
+
+    <button id="quizStartBtn" class="readmore" data-i18n="quiz_btn" style="margin-bottom:28px;">🧠 Quiza dig →</button>
+
+    <section class="block" id="quizSection" style="display:none;">
+      <div id="quizBody"></div>
+    </section>
+
+    <section class="block" id="faqSection">
+      <div class="faq-group-label" data-i18n="faq_group1">Grunderna</div>
+      <div id="faq"></div>
+    </section>
+  </section>
+
+  <!-- GITHUB -->
+  <section class="panel" id="panel-github" data-theme="dark">
+    <p class="eyebrow" data-i18n="nav_github">GitHub</p>
+    <h1 data-i18n="github_h1">Projekt & GitHub</h1>
+    <p class="lede" data-i18n="github_lede">Mina projekt läggs upp här allt eftersom jag bygger dem.</p>
+
+    <section class="block">
+      <h2 data-i18n="github_projekt_h2">Projekt</h2>
+      <div class="proj">
+        <div class="cert-title" data-i18n="proj1_title">filiple.se — hjärtat av projektet</div>
+        <p data-i18n="proj1_p" style="margin:6px 0 8px; font-size:13.5px;">Den här sajten är själva navet — samlingsplatsen där alla mina projekt, certifieringar och kunskaper samlas på ett ställe. Byggde den från grunden, med ett ljust professionellt läge och ett mörkt "hacker"-läge som växlar beroende på vilken sektion man är i. Innehåller bland annat en accordion-FAQ om nätverksgrunder och den inbyggda aktie-terminalen nedan.</p>
+        <a href="https://github.com/Leee270/filiple-website" target="_blank" rel="noopener" data-i18n="see_code">Se koden på GitHub →</a>
+      </div>
+      <div class="proj">
+        <div class="cert-title" data-i18n="proj2_title">Aktie-terminal</div>
+        <p data-i18n="proj2_p" style="margin:6px 0 8px; font-size:13.5px;">En börsterminal-inspirerad dashboard som visar öppningspriser, riktkurser, rekommendationer och nyheter för svenska (Ericsson, Investor, Volvo, Saab) och globala bolag (Tesla, Nvidia, AMD, Palantir, CrowdStrike, AST SpaceMobile, SpaceX). Sammanställs manuellt (med hjälp av Claude) från Börskollen och Affärsvärlden — inbyggd direkt på sajten, se fliken "Aktier".</p>
+      </div>
+      <div class="proj">
+        <div class="cert-title" data-i18n="proj3_title">TryHackMe-anteckningar</div>
+        <p data-i18n="proj3_p" style="margin:6px 0 8px; font-size:13.5px;">Write-ups och anteckningar från min resa på TryHackMe — dokumenterar vad jag gör och lär mig path för path och modul för modul, med start i Pre Security och vidare därifrån allt eftersom jag utvecklas.</p>
+        <a href="https://github.com/Leee270/tryhackme-notes" target="_blank" rel="noopener" data-i18n="see_code">Se koden på GitHub →</a>
+      </div>
+      <div class="empty" data-i18n="next_project">[ ] Nästa projekt är på väg — håll utkik.</div>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="github_profil_h2">Profil</h2>
+      <div class="proj">
+        <div class="cert-title" data-i18n="profile1_title">GitHub-profil</div>
+        <a href="https://github.com/Leee270" target="_blank" rel="noopener">github.com/Leee270 →</a>
+      </div>
+      <div class="proj">
+        <div class="cert-title" data-i18n="profile2_title">TryHackMe-profil</div>
+        <a href="https://tryhackme.com/p/Leee270" target="_blank" rel="noopener">tryhackme.com/p/Leee270 →</a>
+      </div>
+    </section>
+  </section>
+
+  <!-- AKTIER -->
+  <section class="panel" id="panel-aktier" data-theme="dark">
+    <p class="eyebrow" data-i18n="nav_aktier">Aktier</p>
+    <h1 data-i18n="nav_aktier">Aktier</h1>
+    <p class="lede" data-i18n="aktier_lede">Bolag jag bevakar — kurser och nyheter sammanställda av mig (med hjälp av Claude), senast uppdaterat 3 juli 2026.</p>
+
+    <div class="marquee-wrap"><div class="marquee">
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
+      <span class="mtick">ERIC-B<b>112,0</b><span class="mdown">-1,8%</span></span>
+      <span class="mtick">INVE-B<b>~380</b><span class="mup">+</span></span>
+      <span class="mtick">VOLV-B<b>338,6</b><span class="mup">+1,9%</span></span>
+      <span class="mtick">SAAB-B<b>519,5</b><span class="mup">+3,3%</span></span>
+      <span class="mtick">TSLA<b>393,5</b><span class="mdown">-7,5%</span></span>
+      <span class="mtick">NVDA<b>194,8</b><span class="mdown">-1,4%</span></span>
+      <span class="mtick">AMD<b>517,8</b><span class="mdown">-4,3%</span></span>
+      <span class="mtick">PLTR<b>129,8</b><span class="mup">+3,2%</span></span>
+      <span class="mtick">CRWD<b>194,0</b><span class="mup">+0,4%</span></span>
+      <span class="mtick">ASTS<b>86,5</b><span class="mdown">-0,5%</span></span>
+      <span class="mtick">SPCX<b>158,7</b><span class="mup">+0,7%</span></span>
+    </div></div>
+
+    <section class="block" style="margin-top:24px;">
+      <h2 data-i18n="aktier_se_h2">Svenska bolag</h2>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">ERIC B</span><span class="fname">Ericsson</span><span class="price">112,0 SEK</span><span class="chg down">▼ -1,8%</span></div>
+        <p class="ssum" data-i18n="eric_ssum">Störst nyhet just nu: Per Narvinger tar över som vd och koncernchef 1 oktober 2026 efter Börje Ekholm. Ericsson har även inlett rättsliga åtgärder mot Transsion för påstått patentintrång kring 4G/5G. <strong>Riktkurs (Börskollen):</strong> ~103 kr. <strong>Rekommendation:</strong> Blandad — Handelsbanken/Nordea Köp, Goldman Sachs Sälj.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">INVE B</span><span class="fname">Investor</span><span class="price">~380 SEK</span><span class="chg up">▲ stigande trend</span></div>
+        <p class="ssum" data-i18n="inve_ssum">Investmentbolaget bakom bland annat ABB, AstraZeneca, Ericsson och Saab. Aktien ligger i en stigande trendkanal med stöd kring 373 kr. Senaste kvartalsrapporten (Q3, rapporterad 22 jan 2026) visade omsättning på 71,3 md SEK och vinst på 55,4 md SEK. <strong>Riktkurs (Börskollen):</strong> ~382 kr. <strong>Rekommendation:</strong> Blandad — SEB Behåll, DNB Carnegie Köp.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">VOLV B</span><span class="fname">Volvo</span><span class="price">338,6 SEK</span><span class="chg up">▲ +1,9%</span></div>
+        <p class="ssum" data-i18n="volv_ssum">Lastbilstillverkaren steg nästan 2% senaste dagen. Bolaget har tidigare fallit ~3% efter sin Capital Markets Day, men siktar på nästan 3 md USD i intäkter från autonom transport. <strong>Riktkurs (Börskollen):</strong> ~353 kr. <strong>Rekommendation (Affärsvärlden/Placera):</strong> Köp (konsensus övervikt, 64% positiva rekommendationer).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">SAAB B</span><span class="fname">Saab</span><span class="price">519,5 SEK</span><span class="chg up">▲ +3,3%</span></div>
+        <p class="ssum" data-i18n="saab_ssum">Starkt Q1 2026 med 23,6% organisk försäljningstillväxt. Aktien har fått extra skjuts av uppgifter om att NATO planerar ersätta en flotta med Saab-produkter, samt att Polen valt Saabs Kockums som leverantör av nästa generations ubåtar. <strong>Riktkurs (Börskollen):</strong> ~610 kr. <strong>Rekommendation (Börskollen):</strong> Köp (bl.a. SEB, Danske Bank, Pareto Securities).</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 data-i18n="aktier_global_h2">Globala bolag</h2>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">TSLA</span><span class="fname">Tesla</span><span class="price">$393,5</span><span class="chg down">▼ -7,5%</span></div>
+        <p class="ssum" data-i18n="tsla_ssum">Föll kraftigt trots ett starkt Q2 med rekordleveranser på 480 126 fordon som slog förväntningarna — ett klassiskt "sälj på nyheten"-mönster där investerare redan hade prisat in de goda siffrorna. <strong>Riktkurs (Börskollen):</strong> ~464 USD. <strong>Rekommendation:</strong> Blandad — Wedbush Köp (Outperform), Morgan Stanley Behåll (nedgraderad från övervikt).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">NVDA</span><span class="fname">Nvidia</span><span class="price">$194,8</span><span class="chg down">▼ -1,4%</span></div>
+        <p class="ssum" data-i18n="nvda_ssum">Fortsätter befästa sin AI-position genom nya intäktsdelningsavtal med AI-molnleverantörer och en strategisk allians med Palantir. Marknadsvärde cirka 4,7 biljoner dollar. <strong>Riktkurs (Börskollen):</strong> ~138 USD (notera: äldre riktkurser kan ligga kvar i snittet trots kraftig kursuppgång). <strong>Rekommendation (Affärsvärlden):</strong> Behåll/Neutral.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">AMD</span><span class="fname">AMD</span><span class="price">$517,8</span><span class="chg down">▼ -4,3%</span></div>
+        <p class="ssum" data-i18n="amd_ssum">Handlas ned tillsammans med resten av halvledarsektorn. Marknadsvärde cirka 844 md dollar. <strong>Riktkurs (Börskollen):</strong> ~284 USD. <strong>Rekommendation (Börskollen):</strong> Köp (DBS Bank).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">PLTR</span><span class="fname">Palantir</span><span class="price">$129,8</span><span class="chg up">▲ +3,2%</span></div>
+        <p class="ssum" data-i18n="pltr_ssum">Steg efter en uppgradering från DA Davidson och nyheten om ett strategiskt samarbete med Nvidia kring AI-modeller. Marknadsvärde cirka 310 md dollar. <strong>Riktkurs (Börskollen):</strong> ~165 USD. <strong>Rekommendation:</strong> ingen tydlig konsensus hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">CRWD</span><span class="fname">CrowdStrike</span><span class="price">$194,0</span><span class="chg up">▲ +0,4%</span></div>
+        <p class="ssum" data-i18n="crwd_ssum">Viktigt att veta: kursen ser ut att ha "rasat" i vissa rubriker, men det beror på en genomförd aktiesplit 4-för-1, inte ett verkligt kursfall. Bolaget expanderar sitt AI-säkerhetssamarbete med AWS och namngavs som ledare i Forrester Wave för XDR-plattformar. <strong>Riktkurs (Börskollen):</strong> ~294 USD (notera: kan vara satt innan senaste splitten justerades in fullt ut). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">ASTS</span><span class="fname">AST SpaceMobile</span><span class="price">$86,5</span><span class="chg down">▼ -0,5%</span></div>
+        <p class="ssum" data-i18n="asts_ssum">Har säkrat 926 miljoner dollar i japanskt statligt stöd för ett samriskbolag med Rakuten. FCC har även öppnat upp 800 MHz-spektrum för direkt telefon-till-satellit-anslutning, och bolaget har nyligen skjutit upp fler BlueBird-satelliter via SpaceX. <strong>Riktkurs/Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden vid senaste sökning.</p>
+      </div>
+
+      <div class="scard-full">
+        <div class="scard-head"><span class="sym">SPCX</span><span class="fname">SpaceX</span><span class="price">$158,7</span><span class="chg up">▲ stabiliserande</span></div>
+        <p class="ssum" data-i18n="spcx_ssum">Börsnoterades 12 juni 2026 till 135 dollar/aktie — världens största börsnotering någonsin. Extremt volatil resa sedan dess (topp 226 dollar, botten 147 dollar). Wolfe Research inledde bevakning med köprekommendation. <strong>Riktkurs (Börskollen/Finwire):</strong> 175 USD (Wolfe Research). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="link-row" style="flex-wrap:wrap; gap:8px; display:flex;">
+        <a href="https://news.google.com/search?hl=sv-SE&gl=SE" target="_blank" rel="noopener" class="readmore">Google News ↗</a>
+        <a href="https://www.avanza.se" target="_blank" rel="noopener" class="readmore">Avanza ↗</a>
+        <a href="https://www.nordnet.se" target="_blank" rel="noopener" class="readmore">Nordnet ↗</a>
+        <a href="https://www.di.se" target="_blank" rel="noopener" class="readmore">Dagens Industri ↗</a>
+        <a href="https://www.placera.se" target="_blank" rel="noopener" class="readmore">Placera ↗</a>
+      </div>
+      <p data-i18n="aktier_note" style="font-size:11px; color:var(--text-muted); font-family:var(--font-mono); margin-top:10px;">Kurser/nyheter sammanställt manuellt, inte live-uppdaterat. Riktkurser och rekommendationer (Köp/Behåll/Sälj) hämtade från Börskollen och Affärsvärlden.</p>
+    </section>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="panel" id="panel-kontakt" data-theme="light">
+    <p class="eyebrow" data-i18n="nav_kontakt">Kontakt</p>
+    <h1 data-i18n="kontakt_h1">Hör av dig</h1>
+    <p class="lede" data-i18n="kontakt_lede">Öppen för frågor, samarbeten eller bara att snacka cybersäkerhet.</p>
+    <ul class="contact-list">
+      <li><a href="mailto:filip@family-le.com"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>filip@family-le.com</a></li>
+      <li><a href="https://www.linkedin.com/in/filip-le-964878273/" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg>LinkedIn</a></li>
+      <li><a href="https://github.com/Leee270" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>GitHub</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer data-i18n="footer_text">filiple.se — byggd av mig, steg för steg.</footer>
+
+<script>
+  const FAQ = [
+    {q:"Vad är ett LAN (lokalt nätverk)?", a:`<p>LAN (Local Area Network) är ett nätverk begränsat till en plats, t.ex. ditt hem, ett kontor eller en skola. Alla enheter i ett LAN kan prata med varandra direkt, utan att gå via internet — din mobil och din pappas dator hemma är exempel på enheter i samma LAN.</p>`},
+    {q:"Vad är en router?", a:`<p>En router är enheten som kopplar samman ditt lokala nätverk (LAN) med internet. Den avgör vilken väg data ska ta för att komma fram, och är oftast den enhet som delar ut IP-adresser till dina prylar hemma.</p>`},
+    {q:"Vad är en switch?", a:`<p>En switch kopplar samman enheter <em>inom</em> samma LAN, t.ex. datorer på ett kontor. Den ser till att data hittar rätt till exakt rätt enhet inom det lokala nätverket, till skillnad från routern som pratar med världen utanför.</p>`},
+    {q:"Hur kommunicerar olika enheter med varandra över ett nätverk?", a:`
+      <p>Tänk att ditt WiFi hemma är som ett stort hus. Alla enheter som är uppkopplade på samma WiFi "bor" i samma hus, men varje enhet har sitt eget lägenhetsnummer. Det lägenhetsnumret är en IP-adress.</p>
+      <p>Till exempel kan:</p>
+      <ul><li>Din mobil ha 192.168.1.1</li><li>Din pappas dator ha 192.168.1.2</li><li>Din iPad ha 192.168.1.3</li></ul>
+      <p>De tre första delarna (192.168.1) visar att alla tillhör samma nätverk – alltså samma "hus". Det sista numret (1, 2, 3...) identifierar vilken enhet det är, ungefär som ett lägenhetsnummer.</p>
+      <p><strong>Vad händer när du öppnar en webbsida?</strong> Säg att du öppnar Google på din mobil:</p>
+      <ol><li>Din mobil skickar först en förfrågan till routern.</li><li>Routern skickar sedan förfrågan vidare ut på internet.</li><li>Google skickar tillbaka svaret.</li><li>Routern ser att förfrågan kom från 192.168.1.1 och skickar därför svaret tillbaka till just din mobil – inte till din pappas dator eller din iPad.</li></ol>
+      <p>Det är IP-adressen som gör att rätt information hamnar hos rätt enhet.</p>
+      <p><strong>Hur fungerar det i större nätverk?</strong> Hemma kanske ni bara har 4–5 enheter uppkopplade. Men tänk dig ett universitetsbibliotek med över 1 000 enheter uppkopplade samtidigt — det fungerar fortfarande på samma sätt. Varje enhet har sin egen unika IP-adress, så när svaret kommer tillbaka vet nätverket exakt vem som ska ha det, oavsett hur många andra som också surfar samtidigt.</p>`},
+    {q:"Vad är ett WAN (Wide Area Network)?", a:`<p>Ett WAN är ett nätverk som sträcker sig över en större geografisk yta och kopplar samman flera LAN — t.ex. alla byggnader på ett skolområde, eller alla kontor i ett företag i olika städer. Om ett LAN är nätverket i ett hus, är ett WAN nätverket som binder ihop flera hus.</p>`},
+    {q:"Vad är internet / WWW?", a:`<p>Internet är det globala nätverket av miljontals sammankopplade LAN och WAN över hela världen — nätverkens nätverk. WWW (World Wide Web) är egentligen bara en av tjänsterna som körs ovanpå internet: samlingen av webbsidor du besöker i en webbläsare. Webben är alltså en del av internet, inte hela internet — mejl och filöverföring är exempel på annat som också går via internet.</p>`},
+  ];
+  const FAQ2 = [
+    {q:"Hur fungerar HTTP och HTTPS?", a:`<p>HTTP (HyperText Transfer Protocol) är språket en webbläsare (<strong>klienten</strong>) och en webbserver (<strong>servern</strong>) använder för att prata med varandra. Klienten skickar en <strong>request</strong> ("kan jag få den här sidan?") och servern svarar med en <strong>response</strong> (sidans innehåll, eller ett felmeddelande om något gick fel). HTTPS är samma sak, fast krypterat — S:et står för Secure — så att ingen som avlyssnar trafiken kan läsa vad som skickas.</p>`},
+    {q:"Vad är en IP-adress?", a:`<p>En IP-adress är en unik "adress" som varje enhet på internet får, ungefär som ett personnummer. Den gör att data vet exakt vart den ska skickas och varifrån den kommer. Det finns två versioner i bruk idag — IPv4 (t.ex. 192.168.1.1) och det nyare IPv6.</p>`},
+    {q:"Vad är ett domännamn och DNS?", a:`<p>När du skriver "youtube.com" i webbläsaren är det egentligen inte det sidan "heter" i teknisk mening — bakom kulisserna pekar det namnet mot en specifik IP-adress, ungefär som ett personnummer pekar ut en specifik person. IP-adresser är opraktiska för människor att komma ihåg — därför använder vi domännamn istället, som fungerar som en telefonkatalog: du slår upp ett namn du minns, och katalogen (DNS) hittar rätt "nummer" åt dig.</p>`},
+    {q:"Vad är DNS?", a:`<p>DNS står för Domain Name System och fungerar som internets telefonbok — eller enklare, en kontaktlista.</p>
+      <p>Tänk dig att du vill ringa en kompis. Oftast skriver du inte in kompisens telefonnummer, utan letar upp namnet bland dina kontakter och ringer. Mobilen hittar rätt nummer åt dig utan att du märker det, eftersom numret är sparat under ett namn.</p>
+      <p>DNS fungerar på samma sätt. När du skriver <code>google.com</code> i webbläsaren skickar din dator en fråga till en DNS-server: "Vilken IP-adress har google.com?" DNS-servern letar upp rätt IP-adress och skickar tillbaka den till din dator, som sedan kan hitta Googles server och ladda webbplatsen.</p>
+      <p>Du ser fortfarande <code>google.com</code> i webbläsaren, men i bakgrunden använder datorn IP-adressen som DNS hittade. Domännamn (ex. Google.com) är till för människor. IP-adresser är till för datorer. DNS är tjänsten som översätter mellan dem.</p>`},
+  ];
+  const FAQ3 = [
+    {q:"Vad är IPv4?", a:`<p>IPv4 är den äldre och fortfarande mest använda versionen av IP-adresser. Den skrivs som fyra tal mellan 0–255 (t.ex. 192.168.1.1) och ger cirka 4,3 miljarder unika adresser — därför håller det nyare IPv6 gradvis på att ta över.</p>`},
+    {q:"Vad är en subnetmask?", a:`<p>En subnetmask talar om vilken del av en IP-adress som representerar nätverket och vilken del som representerar den enskilda enheten. Ett vanligt exempel är 255.255.255.0, som säger att de tre första talen pekar ut nätverket och det sista pekar ut enheten.</p>`},
+    {q:"Vad är en gateway?", a:`<p>En gateway (ofta samma sak som routern hemma) är "utgången" en enhet skickar all trafik till som ska lämna det egna nätverket. Utan en gateway inställd kan enheten bara prata med andra enheter i samma nätverk, inte med internet.</p>`},
+    {q:"Vad är DHCP?", a:`<p>DHCP delar automatiskt ut IP-adresser till enheter när de ansluter till ett nätverk. Det är därför din telefon bara "kopplar upp sig" utan att du manuellt behöver skriva in en adress.</p>`},
+    {q:"Vad är TCP?", a:`<p>TCP skickar data där mottagaren bekräftar att varje del kommit fram korrekt och i rätt ordning. Pålitligt men något långsammare — används när inget data får gå förlorat, t.ex. vid webbsidor och mejl.</p>`},
+    {q:"Vad är UDP?", a:`<p>UDP skickar data utan att vänta på bekräftelse, vilket gör det snabbare men mindre pålitligt. Används där hastighet är viktigare än perfektion, t.ex. videosamtal eller onlinespel.</p>`},
+    {q:"Vad är routing?", a:`<p>Routing är processen där routrar avgör vilken väg data ska ta för att nå sitt mål, ofta genom flera nätverk på vägen — ungefär som postsortering steg för steg mot rätt destination.</p>`},
+    {q:"Vad är VLAN?", a:`<p>VLAN gör det möjligt att dela upp ett fysiskt nätverk i flera separata nätverk, även om enheterna sitter på samma switch. Används t.ex. för att hålla isär gäst-WiFi och kontorsnätverk på samma hårdvara.</p>`},
+  ];
+
+  const FAQ_EN = [
+    {q:"What is a LAN (local area network)?", a:`<p>A LAN (Local Area Network) is a network limited to one location, e.g. your home, an office, or a school. All devices on a LAN can talk to each other directly, without going through the internet — your phone and your dad's computer at home are examples of devices on the same LAN.</p>`},
+    {q:"What does a router do?", a:`<p>A router is the device that connects your local network (LAN) to the internet. It decides which path data should take to arrive, and is usually the device that hands out IP addresses to your gadgets at home.</p>`},
+    {q:"What does a switch do?", a:`<p>A switch connects devices <em>within</em> the same LAN, e.g. computers in an office. It makes sure data finds its way to exactly the right device within the local network, unlike the router, which talks to the outside world.</p>`},
+    {q:"How do different devices communicate over a network?", a:`
+      <p>Think of your WiFi at home as a big apartment building. Every device connected to the same WiFi "lives" in the same building, but each device has its own apartment number. That apartment number is an IP address.</p>
+      <p>For example:</p>
+      <ul><li>Your phone might have 192.168.1.1</li><li>Your dad's computer might have 192.168.1.2</li><li>Your iPad might have 192.168.1.3</li></ul>
+      <p>The first three parts (192.168.1) show that everyone belongs to the same network — the same "building". The last number (1, 2, 3...) identifies which device it is, like an apartment number.</p>
+      <p><strong>What happens when you open a webpage?</strong> Say you open Google on your phone:</p>
+      <ol><li>Your phone first sends a request to the router.</li><li>The router forwards the request out onto the internet.</li><li>Google sends back the response.</li><li>The router sees the request came from 192.168.1.1 and sends the response back to exactly your phone — not your dad's computer or your iPad.</li></ol>
+      <p>It's the IP address that makes sure the right information ends up with the right device.</p>
+      <p><strong>How does this work on bigger networks?</strong> At home you might only have 4–5 devices connected. But imagine a university library with over 1,000 devices connected at once — it still works the same way. Every device has its own unique IP address, so when the response comes back, the network knows exactly who should get it, no matter how many others are browsing at the same time.</p>`},
+    {q:"What is a WAN (Wide Area Network)?", a:`<p>A WAN is a network that spans a larger geographic area and connects several LANs — e.g. all the buildings on a school campus, or all a company's offices in different cities. If a LAN is the network in one building, a WAN is the network that ties several buildings together.</p>`},
+    {q:"What is the internet / WWW?", a:`<p>The internet is the global network of millions of interconnected LANs and WANs worldwide — a network of networks. The WWW (World Wide Web) is really just one of the services running on top of the internet: the collection of webpages you visit in a browser. The web is a part of the internet, not the whole internet — email and file transfer are examples of other things that also run over the internet.</p>`},
+  ];
+  const FAQ2_EN = [
+    {q:"How do HTTP and HTTPS work?", a:`<p>HTTP (HyperText Transfer Protocol) is the language a web browser (the <strong>client</strong>) and a web server (the <strong>server</strong>) use to talk to each other. The client sends a <strong>request</strong> ("can I have this page?") and the server replies with a <strong>response</strong> (the page's content, or an error message if something went wrong). HTTPS is the same thing, but encrypted — the S stands for Secure — so no one eavesdropping on the traffic can read what's being sent.</p>`},
+    {q:"What is an IP address?", a:`<p>An IP address is a unique "address" every device on the internet gets, a bit like a personal ID number. It lets data know exactly where to go and where it came from. There are two versions in use today — IPv4 (e.g. 192.168.1.1) and the newer IPv6.</p>`},
+    {q:"What is a domain name and DNS?", a:`<p>When you type "youtube.com" into your browser, that's not technically what the site is "called" behind the scenes — that name actually points to a specific IP address, similar to how a personal ID number points to a specific person. IP addresses are impractical for humans to remember — so we use domain names instead, which work like a phone book: you look up a name you remember, and the directory (DNS) finds the right "number" for you.</p>`},
+    {q:"What is DNS?", a:`<p>DNS stands for Domain Name System and works like the internet's phone book — or more simply, a contacts list.</p>
+      <p>Imagine you want to call a friend. You usually don't type in their phone number — you look up their name in your contacts and call. Your phone finds the right number for you without you noticing, because the number is saved under a name.</p>
+      <p>DNS works the same way. When you type <code>google.com</code> into your browser, your computer sends a query to a DNS server: "What's the IP address for google.com?" The DNS server looks up the right IP address and sends it back to your computer, which can then find Google's server and load the page.</p>
+      <p>You still see <code>google.com</code> in the browser, but behind the scenes the computer uses the IP address DNS found. Domain names (e.g. Google.com) are for humans. IP addresses are for computers. DNS is the service that translates between them.</p>`},
+  ];
+  const FAQ3_EN = [
+    {q:"What is IPv4?", a:`<p>IPv4 is the older, still most widely used version of IP addresses. It's written as four numbers between 0–255 (e.g. 192.168.1.1) and provides around 4.3 billion unique addresses — which is why the newer IPv6 is gradually taking over.</p>`},
+    {q:"What is a subnet mask?", a:`<p>A subnet mask indicates which part of an IP address represents the network and which part represents the individual device. A common example is 255.255.255.0, which means the first three numbers identify the network and the last one identifies the device.</p>`},
+    {q:"What is a gateway?", a:`<p>A gateway (often the same thing as the router at home) is the "exit" a device sends all traffic to that's leaving its own network. Without a gateway configured, a device can only talk to other devices on the same network, not the internet.</p>`},
+    {q:"What does DHCP do?", a:`<p>DHCP automatically hands out IP addresses to devices when they connect to a network. That's why your phone just "connects" without you having to manually type in an address.</p>`},
+    {q:"What is TCP?", a:`<p>TCP sends data where the receiver confirms every part arrived correctly and in the right order. Reliable but a bit slower — used when no data can be lost, e.g. for webpages and email.</p>`},
+    {q:"What is UDP?", a:`<p>UDP sends data without waiting for confirmation, making it faster but less reliable. Used where speed matters more than perfection, e.g. video calls or online gaming.</p>`},
+    {q:"What is routing?", a:`<p>Routing is the process where routers decide which path data should take to reach its destination, often through several networks along the way — similar to mail sorting, step by step toward the right destination.</p>`},
+    {q:"What is a VLAN?", a:`<p>A VLAN makes it possible to split a physical network into several separate networks, even if the devices sit on the same switch. Used e.g. to keep guest WiFi and an office network separate on the same hardware.</p>`},
+  ];
+
+  function renderFaq(lang){
+    lang = lang || currentLang || 'sv';
+    const el = document.getElementById('faq');
+    el.innerHTML = '';
+    const faqSet = lang === 'en' ? [FAQ_EN, FAQ2_EN, FAQ3_EN] : [FAQ, FAQ2, FAQ3];
+    const labels = lang === 'en'
+      ? [null, "How the web talks", "A bit deeper"]
+      : [null, "Hur webben pratar", "Lite djupare"];
+    const groups = [[labels[0], faqSet[0]], [labels[1], faqSet[1]], [labels[2], faqSet[2]]];
+    groups.forEach(([label, items])=>{
+      if(label){
+        const l = document.createElement('div');
+        l.className='faq-group-label'; l.textContent=label; el.appendChild(l);
+      }
+      items.forEach(item=>{
+        const wrap = document.createElement('div'); wrap.className='faq-item';
+        wrap.innerHTML = `<button class="faq-q"><span>${item.q}</span><span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">${item.a}</div></div>`;
+        const btn = wrap.querySelector('.faq-q');
+        const ans = wrap.querySelector('.faq-a');
+        btn.addEventListener('click', ()=>{
+          const isOpen = wrap.classList.contains('open');
+          document.querySelectorAll('.faq-item.open').forEach(o=>{
+            o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight=null;
+          });
+          if(!isOpen){ wrap.classList.add('open'); ans.style.maxHeight = ans.scrollHeight+'px'; }
+        });
+        el.appendChild(wrap);
+      });
+    });
+  }
+  renderFaq('sv');
+
+  // Panel + theme switching
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const buttons = document.querySelectorAll('nav button');
+  const panels = document.querySelectorAll('.panel');
+  const flash = document.getElementById('flash');
+
+  buttons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = btn.dataset.panel;
+      const targetPanel = document.getElementById('panel-'+target);
+      const theme = targetPanel.dataset.theme;
+
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if(!reduceMotion){ flash.classList.add('on'); setTimeout(()=>flash.classList.remove('on'),180); }
+
+      document.documentElement.setAttribute('data-theme', theme);
+      panels.forEach(p=>p.classList.remove('active'));
+      targetPanel.classList.add('active');
+      window.scrollTo({top:0, behavior: reduceMotion ? 'auto':'smooth'});
+    });
+  });
+  document.getElementById('brandLink').addEventListener('click', e=>{
+    e.preventDefault(); buttons[0].click();
+  });
+
+  // Språkväxling (SE/EN)
+  const I18N = {
+    sv: {
+      nav_om:"Om mig", nav_cyber:"Cybersäkerhet", nav_lardig:"Lär dig", nav_github:"GitHub", nav_aktier:"Aktier", nav_kontakt:"Kontakt",
+      om_eyebrow:"Portfolio & CV",
+      om_lede:"Bygger min kompetens inom nätverk, digital infrastruktur och IT-säkerhet — nyfiken på hur system hänger ihop och hur de skyddas, med målet att hitta min plats inom branschen efter examen.",
+      om_h2:"Om mig",
+      om_p:"Jag blev intresserad av cybersäkerhet när jag upptäckte hur mycket som händer bakom kulisserna på internet. Sedan dess har jag fastnat för att lära mig hur system fungerar, bygga egna projekt och ständigt utveckla mina tekniska kunskaper. Jag motiveras av att lösa problem och utmana mig själv, både inom teknik och i vardagen. När jag inte sitter vid datorn tränar jag, är sportintresserad (framför allt fotboll och ishockey), och följer gärna börsen och mina investeringar.",
+      om_resan_h2:"Resan",
+      road1_when:"Nu", road1_what:"Förbereder mig på egen hand — grunder i nätverk, Linux och cybersäkerhet",
+      road2_when:"Höstterminen 2026", road2_what:"Börjar studera nätverk, digital infrastruktur & cybersäkerhet på JU",
+      road3_when:"Under studierna", road3_what:"Certifieringar, hemmalabb och praktiska projekt, dokumenterade här och på GitHub",
+      road4_when:"Mål", road4_what:"Bygga en karriär inom cybersäkerhet och digital infrastruktur efter examen",
+      cyber_certs_h2:"Certifieringar", ms_learn:"Microsoft Learn",
+      cert1_title:"Beskriv grundläggande cybersäkerhetshot, attacker och riskreducering",
+      cert2_title:"Beskriva nätverksbaserade hot och åtgärder",
+      see_achievement:"Se achievement →",
+      stack_h2:"Kunskapsstack",
+      skill1:"Nätverk, infrastruktur & cybersäkerhet (JU)", skill1_status:"påbörjas HT 2026", status_ongoing:"pågår",
+      lardig_lede:"Grunderna innan man går in i cybervärlden — skrivet både som mina egna anteckningar och för dig som är nyfiken.",
+      quiz_btn:"🧠 Quiza dig →", faq_group1:"Grunderna",
+      github_h1:"Projekt & GitHub", github_lede:"Mina projekt läggs upp här allt eftersom jag bygger dem.",
+      github_projekt_h2:"Projekt",
+      proj1_title:"filiple.se — hjärtat av projektet",
+      proj1_p:'Den här sajten är själva navet — samlingsplatsen där alla mina projekt, certifieringar och kunskaper samlas på ett ställe. Byggde den från grunden, med ett ljust professionellt läge och ett mörkt "hacker"-läge som växlar beroende på vilken sektion man är i. Innehåller bland annat en accordion-FAQ om nätverksgrunder och den inbyggda aktie-terminalen nedan.',
+      see_code:"Se koden på GitHub →",
+      proj2_title:"Aktie-terminal",
+      proj2_p:'En börsterminal-inspirerad dashboard som visar öppningspriser, riktkurser, rekommendationer och nyheter för svenska (Ericsson, Investor, Volvo, Saab) och globala bolag (Tesla, Nvidia, AMD, Palantir, CrowdStrike, AST SpaceMobile, SpaceX). Sammanställs manuellt (med hjälp av Claude) från Börskollen och Affärsvärlden — inbyggd direkt på sajten, se fliken "Aktier".',
+      proj3_title:"TryHackMe-anteckningar",
+      proj3_p:"Write-ups och anteckningar från min resa på TryHackMe — dokumenterar vad jag gör och lär mig path för path och modul för modul, med start i Pre Security och vidare därifrån allt eftersom jag utvecklas.",
+      next_project:"[ ] Nästa projekt är på väg — håll utkik.",
+      github_profil_h2:"Profil", profile1_title:"GitHub-profil", profile2_title:"TryHackMe-profil",
+      aktier_lede:"Bolag jag bevakar — kurser och nyheter sammanställda av mig (med hjälp av Claude), senast uppdaterat 3 juli 2026.",
+      aktier_se_h2:"Svenska bolag", aktier_global_h2:"Globala bolag",
+      aktier_note:"Kurser/nyheter sammanställt manuellt, inte live-uppdaterat. Riktkurser och rekommendationer (Köp/Behåll/Sälj) hämtade från Börskollen och Affärsvärlden.",
+      kontakt_h1:"Hör av dig", kontakt_lede:"Öppen för frågor, samarbeten eller bara att snacka cybersäkerhet.",
+      footer_text:"filiple.se — byggd av mig, steg för steg.",
+      lang_note:"OBS: FAQ, quiz och aktietexterna nedan är ännu bara på svenska.",
+      eric_ssum:'Störst nyhet just nu: Per Narvinger tar över som vd och koncernchef 1 oktober 2026 efter Börje Ekholm. Ericsson har även inlett rättsliga åtgärder mot Transsion för påstått patentintrång kring 4G/5G. <strong>Riktkurs (Börskollen):</strong> ~103 kr. <strong>Rekommendation:</strong> Blandad — Handelsbanken/Nordea Köp, Goldman Sachs Sälj.',
+      inve_ssum:'Investmentbolaget bakom bland annat ABB, AstraZeneca, Ericsson och Saab. Aktien ligger i en stigande trendkanal med stöd kring 373 kr. Senaste kvartalsrapporten (Q3, rapporterad 22 jan 2026) visade omsättning på 71,3 md SEK och vinst på 55,4 md SEK. <strong>Riktkurs (Börskollen):</strong> ~382 kr. <strong>Rekommendation:</strong> Blandad — SEB Behåll, DNB Carnegie Köp.',
+      volv_ssum:'Lastbilstillverkaren steg nästan 2% senaste dagen. Bolaget har tidigare fallit ~3% efter sin Capital Markets Day, men siktar på nästan 3 md USD i intäkter från autonom transport. <strong>Riktkurs (Börskollen):</strong> ~353 kr. <strong>Rekommendation (Affärsvärlden/Placera):</strong> Köp (konsensus övervikt, 64% positiva rekommendationer).',
+      saab_ssum:'Starkt Q1 2026 med 23,6% organisk försäljningstillväxt. Aktien har fått extra skjuts av uppgifter om att NATO planerar ersätta en flotta med Saab-produkter, samt att Polen valt Saabs Kockums som leverantör av nästa generations ubåtar. <strong>Riktkurs (Börskollen):</strong> ~610 kr. <strong>Rekommendation (Börskollen):</strong> Köp (bl.a. SEB, Danske Bank, Pareto Securities).',
+      tsla_ssum:'Föll kraftigt trots ett starkt Q2 med rekordleveranser på 480 126 fordon som slog förväntningarna — ett klassiskt "sälj på nyheten"-mönster där investerare redan hade prisat in de goda siffrorna. <strong>Riktkurs (Börskollen):</strong> ~464 USD. <strong>Rekommendation:</strong> Blandad — Wedbush Köp (Outperform), Morgan Stanley Behåll (nedgraderad från övervikt).',
+      nvda_ssum:'Fortsätter befästa sin AI-position genom nya intäktsdelningsavtal med AI-molnleverantörer och en strategisk allians med Palantir. Marknadsvärde cirka 4,7 biljoner dollar. <strong>Riktkurs (Börskollen):</strong> ~138 USD (notera: äldre riktkurser kan ligga kvar i snittet trots kraftig kursuppgång). <strong>Rekommendation (Affärsvärlden):</strong> Behåll/Neutral.',
+      amd_ssum:'Handlas ned tillsammans med resten av halvledarsektorn. Marknadsvärde cirka 844 md dollar. <strong>Riktkurs (Börskollen):</strong> ~284 USD. <strong>Rekommendation (Börskollen):</strong> Köp (DBS Bank).',
+      pltr_ssum:'Steg efter en uppgradering från DA Davidson och nyheten om ett strategiskt samarbete med Nvidia kring AI-modeller. Marknadsvärde cirka 310 md dollar. <strong>Riktkurs (Börskollen):</strong> ~165 USD. <strong>Rekommendation:</strong> ingen tydlig konsensus hittad hos Börskollen/Affärsvärlden vid senaste sökning.',
+      crwd_ssum:'Viktigt att veta: kursen ser ut att ha "rasat" i vissa rubriker, men det beror på en genomförd aktiesplit 4-för-1, inte ett verkligt kursfall. Bolaget expanderar sitt AI-säkerhetssamarbete med AWS och namngavs som ledare i Forrester Wave för XDR-plattformar. <strong>Riktkurs (Börskollen):</strong> ~294 USD (notera: kan vara satt innan senaste splitten justerades in fullt ut). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).',
+      asts_ssum:'Har säkrat 926 miljoner dollar i japanskt statligt stöd för ett samriskbolag med Rakuten. FCC har även öppnat upp 800 MHz-spektrum för direkt telefon-till-satellit-anslutning, och bolaget har nyligen skjutit upp fler BlueBird-satelliter via SpaceX. <strong>Riktkurs/Rekommendation:</strong> ingen aktuell data hittad hos Börskollen/Affärsvärlden vid senaste sökning.',
+      spcx_ssum:'Börsnoterades 12 juni 2026 till 135 dollar/aktie — världens största börsnotering någonsin. Extremt volatil resa sedan dess (topp 226 dollar, botten 147 dollar). Wolfe Research inledde bevakning med köprekommendation. <strong>Riktkurs (Börskollen/Finwire):</strong> 175 USD (Wolfe Research). <strong>Rekommendation (Börskollen):</strong> Köp (Wolfe Research, Outperform).',
+    },
+    en: {
+      nav_om:"About me", nav_cyber:"Cybersecurity", nav_lardig:"Learn", nav_github:"GitHub", nav_aktier:"Stocks", nav_kontakt:"Contact",
+      om_eyebrow:"Portfolio & CV",
+      om_lede:"Building my skills in networking, digital infrastructure and IT security — curious about how systems fit together and how they're protected, aiming to find my place in the industry after graduating.",
+      om_h2:"About me",
+      om_p:"I got interested in cybersecurity when I discovered how much happens behind the scenes on the internet. Since then I've been hooked on learning how systems work, building my own projects, and constantly developing my technical skills. I'm motivated by solving problems and challenging myself, both in tech and in everyday life. When I'm not at the computer I train, follow sports (mainly football and ice hockey), and keep an eye on the stock market and my investments.",
+      om_resan_h2:"The journey",
+      road1_when:"Now", road1_what:"Preparing on my own — basics in networking, Linux and cybersecurity",
+      road2_when:"Autumn term 2026", road2_what:"Starting studies in networking, digital infrastructure & cybersecurity at JU",
+      road3_when:"During my studies", road3_what:"Certifications, home labs and hands-on projects, documented here and on GitHub",
+      road4_when:"Goal", road4_what:"Build a career in cybersecurity and digital infrastructure after graduating",
+      cyber_certs_h2:"Certifications", ms_learn:"Microsoft Learn",
+      cert1_title:"Describe basic cybersecurity threats, attacks and mitigations",
+      cert2_title:"Describe network-based threats and mitigations",
+      see_achievement:"View achievement →",
+      stack_h2:"Skill stack",
+      skill1:"Networking, infrastructure & cybersecurity (JU)", skill1_status:"starts autumn 2026", status_ongoing:"ongoing",
+      lardig_lede:"The basics before diving into the cyber world — written both as my own notes and for anyone curious.",
+      quiz_btn:"🧠 Quiz yourself →", faq_group1:"The basics",
+      github_h1:"Projects & GitHub", github_lede:"My projects get posted here as I build them.",
+      github_projekt_h2:"Projects",
+      proj1_title:"filiple.se — the heart of it all",
+      proj1_p:'This site is the hub — the place where all my projects, certifications and knowledge come together. Built it from scratch, with a light professional mode and a dark "hacker" mode that switches depending on which section you\'re in. Includes an accordion FAQ on networking basics and the built-in stock terminal below.',
+      see_code:"View code on GitHub →",
+      proj2_title:"Stock terminal",
+      proj2_p:'A trading-terminal-inspired dashboard showing opening prices, price targets, recommendations and news for Swedish (Ericsson, Investor, Volvo, Saab) and global companies (Tesla, Nvidia, AMD, Palantir, CrowdStrike, AST SpaceMobile, SpaceX). Compiled manually (with Claude\'s help) from Börskollen and Affärsvärlden — built directly into the site, see the "Stocks" tab.',
+      proj3_title:"TryHackMe notes",
+      proj3_p:"Write-ups and notes from my TryHackMe journey — documenting what I do and learn, path by path and module by module, starting with Pre Security and onward as I progress.",
+      next_project:"[ ] Next project is on its way — stay tuned.",
+      github_profil_h2:"Profiles", profile1_title:"GitHub profile", profile2_title:"TryHackMe profile",
+      aktier_lede:"Companies I follow — prices and news compiled by me (with Claude's help), last updated July 3, 2026.",
+      aktier_se_h2:"Swedish companies", aktier_global_h2:"Global companies",
+      aktier_note:"Prices/news compiled manually, not live-updated. Price targets and recommendations (Buy/Hold/Sell) sourced from Börskollen and Affärsvärlden.",
+      kontakt_h1:"Get in touch", kontakt_lede:"Open to questions, collaborations, or just talking cybersecurity.",
+      footer_text:"filiple.se — built by me, step by step.",
+      lang_note:"Note: the FAQ, quiz and stock write-ups below are still Swedish-only for now.",
+      eric_ssum:'Biggest news right now: Per Narvinger takes over as CEO on October 1, 2026, succeeding Börje Ekholm. Ericsson has also launched legal action against Transsion over alleged 4G/5G patent infringement. <strong>Price target (Börskollen):</strong> ~103 SEK. <strong>Recommendation:</strong> Mixed — Handelsbanken/Nordea Buy, Goldman Sachs Sell.',
+      inve_ssum:'The investment company behind ABB, AstraZeneca, Ericsson and Saab, among others. The stock is in a rising trend channel with support around 373 SEK. The latest quarterly report (Q3, reported Jan 22, 2026) showed revenue of 71.3bn SEK and profit of 55.4bn SEK. <strong>Price target (Börskollen):</strong> ~382 SEK. <strong>Recommendation:</strong> Mixed — SEB Hold, DNB Carnegie Buy.',
+      volv_ssum:"The truck maker rose almost 2% over the last day. The stock previously fell ~3% after its Capital Markets Day, but is targeting close to $3bn in revenue from autonomous transport. <strong>Price target (Börskollen):</strong> ~353 SEK. <strong>Recommendation (Affärsvärlden/Placera):</strong> Buy (consensus overweight, 64% positive recommendations).",
+      saab_ssum:'Strong Q1 2026 with 23.6% organic sales growth. The stock got an extra boost from reports that NATO plans to replace a fleet with Saab products, plus Poland selecting Saab\'s Kockums as supplier for its next-generation submarines. <strong>Price target (Börskollen):</strong> ~610 SEK. <strong>Recommendation (Börskollen):</strong> Buy (incl. SEB, Danske Bank, Pareto Securities).',
+      tsla_ssum:'Fell sharply despite a strong Q2 with record deliveries of 480,126 vehicles that beat expectations — a classic "sell the news" pattern where investors had already priced in the good numbers. <strong>Price target (Börskollen):</strong> ~$464. <strong>Recommendation:</strong> Mixed — Wedbush Buy (Outperform), Morgan Stanley Hold (downgraded from overweight).',
+      nvda_ssum:"Continues cementing its AI position through new revenue-sharing deals with AI cloud providers and a strategic alliance with Palantir. Market cap around $4.7 trillion. <strong>Price target (Börskollen):</strong> ~$138 (note: older price targets may still be dragging down the average despite the sharp price rise). <strong>Recommendation (Affärsvärlden):</strong> Hold/Neutral.",
+      amd_ssum:"Trading down along with the rest of the semiconductor sector. Market cap around $844bn. <strong>Price target (Börskollen):</strong> ~$284. <strong>Recommendation (Börskollen):</strong> Buy (DBS Bank).",
+      pltr_ssum:"Rose after an upgrade from DA Davidson and news of a strategic partnership with Nvidia on AI models. Market cap around $310bn. <strong>Price target (Börskollen):</strong> ~$165. <strong>Recommendation:</strong> no clear consensus found at Börskollen/Affärsvärlden as of the latest search.",
+      crwd_ssum:'Important to know: the price looks like it "crashed" in some headlines, but that\'s due to a completed 4-for-1 stock split, not an actual price drop. The company is expanding its AI security partnership with AWS and was named a Leader in the Forrester Wave for XDR platforms. <strong>Price target (Börskollen):</strong> ~$294 (note: may have been set before the recent split was fully reflected). <strong>Recommendation (Börskollen):</strong> Buy (Wolfe Research, Outperform).',
+      asts_ssum:"Secured $926 million in Japanese government backing for a joint venture with Rakuten. The FCC has also opened up 800 MHz spectrum for direct phone-to-satellite connectivity, and the company recently launched more BlueBird satellites via SpaceX. <strong>Price target/Recommendation:</strong> no current data found at Börskollen/Affärsvärlden as of the latest search.",
+      spcx_ssum:"Went public on June 12, 2026 at $135/share — the largest IPO in history. Extremely volatile ride since then (high of $226, low of $147). Wolfe Research initiated coverage with a buy rating. <strong>Price target (Börskollen/Finwire):</strong> $175 (Wolfe Research). <strong>Recommendation (Börskollen):</strong> Buy (Wolfe Research, Outperform).",
+    }
+  };
+
+  let currentLang = 'sv';
+  function setLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+    });
+    document.getElementById('langToggle').textContent = lang === 'sv' ? 'EN' : 'SV';
+    renderFaq(lang);
+    if(document.getElementById('quizSection').style.display !== 'none'){
+      closeQuiz();
+    }
+  }
+  document.getElementById('langToggle').addEventListener('click', ()=>{
+    setLang(currentLang === 'sv' ? 'en' : 'sv');
+  });
+
+  // Quiz
+  const QUIZ_SV = [
+    {q:"Vad är en IP-adress?", opts:["En unik adress för varje enhet på ett nätverk","Ett lösenord för WiFi","Ett datorvirus","En typ av nätverkskabel"], correct:0},
+    {q:"Vad är IPv4?", opts:["Den nyaste versionen av IP-adresser","En äldre variant av IP-adresser, skriven som fyra tal","Ett krypteringsprotokoll","En typ av router"], correct:1},
+    {q:"Vad gör en router, framför allt?", opts:["Kopplar samman enheter inom samma nätverk","Kopplar samman nätverket med internet","Lagrar webbsidor lokalt","Skannar efter virus"], correct:1},
+    {q:"Vad gör en switch, framför allt?", opts:["Kopplar samman enheter inom samma nätverk","Kopplar ihop nätverket med internet","Krypterar all trafik","Skickar och tar emot mejl"], correct:0},
+    {q:"Vad är DNS till för?", opts:["Att lagra lösenord säkert","Att översätta domännamn till IP-adresser","Att fungera som brandvägg","Att skydda mot virus"], correct:1},
+    {q:"Vad gör DHCP?", opts:["Delar automatiskt ut IP-adresser till enheter","Krypterar nätverkstrafik","Skyddar mot skadlig kod","Översätter domännamn till IP-adresser"], correct:0},
+    {q:"Vad är skillnaden mellan TCP och UDP?", opts:["TCP är snabbare men mindre pålitligt","UDP är snabbare men mindre pålitligt","De är exakt samma sak","TCP används bara för mejl"], correct:1},
+    {q:"Vad används en subnetmask till?", opts:["Att kryptera hela nätverket","Att visa vilken del av en IP-adress som är nätverk och vilken som är enhet","Att blockera hackare","Att öka internethastigheten"], correct:1},
+    {q:"Vad är en gateway?", opts:["En typ av datorvirus","Utgången en enhet skickar trafik till som ska lämna det egna nätverket","Ett lösenord för routern","En webbläsare"], correct:1},
+    {q:"Vad är ett VLAN?", opts:["En fysisk nätverkskabel","Ett sätt att dela upp ett nätverk logiskt trots samma hårdvara","Ett krypteringsprotokoll","En typ av brandvägg"], correct:1},
+    {q:"Vad är skillnaden mellan HTTP och HTTPS?", opts:["HTTPS är krypterat, HTTP är det inte","HTTP är krypterat, HTTPS är det inte","De är exakt samma sak","HTTPS används bara för mejl"], correct:0},
+    {q:"Vad är ett LAN?", opts:["Ett nätverk begränsat till en plats, t.ex. ett hem eller en skola","Hela internet","En typ av datorvirus","Ett krypteringsprotokoll"], correct:0},
+    {q:"Vad är ett WAN?", opts:["Ett nätverk begränsat till ett enda rum","Ett nätverk som binder ihop flera LAN över en större geografisk yta","En brandvägg","Ett lösenord"], correct:1},
+    {q:"Vad är routing?", opts:["Processen där routrar väljer väg för data mellan nätverk","Att kryptera lösenord","Att skanna efter virus","Att skicka mejl"], correct:0},
+  ];
+  const QUIZ_EN = [
+    {q:"What is an IP address?", opts:["A unique address for every device on a network","A password for WiFi","A computer virus","A type of network cable"], correct:0},
+    {q:"What is IPv4?", opts:["The newest version of IP addresses","An older variant of IP addresses, written as four numbers","An encryption protocol","A type of router"], correct:1},
+    {q:"What does a router mainly do?", opts:["Connects devices within the same network","Connects the network to the internet","Stores webpages locally","Scans for viruses"], correct:1},
+    {q:"What does a switch mainly do?", opts:["Connects devices within the same network","Connects the network to the internet","Encrypts all traffic","Sends and receives email"], correct:0},
+    {q:"What is DNS for?", opts:["Storing passwords securely","Translating domain names into IP addresses","Acting as a firewall","Protecting against viruses"], correct:1},
+    {q:"What does DHCP do?", opts:["Automatically hands out IP addresses to devices","Encrypts network traffic","Protects against malware","Translates domain names into IP addresses"], correct:0},
+    {q:"What's the difference between TCP and UDP?", opts:["TCP is faster but less reliable","UDP is faster but less reliable","They're exactly the same","TCP is only used for email"], correct:1},
+    {q:"What is a subnet mask used for?", opts:["Encrypting the whole network","Showing which part of an IP address is the network and which is the device","Blocking hackers","Increasing internet speed"], correct:1},
+    {q:"What is a gateway?", opts:["A type of computer virus","The exit a device sends traffic to when leaving its own network","A password for the router","A web browser"], correct:1},
+    {q:"What is a VLAN?", opts:["A physical network cable","A way to logically split a network despite shared hardware","An encryption protocol","A type of firewall"], correct:1},
+    {q:"What's the difference between HTTP and HTTPS?", opts:["HTTPS is encrypted, HTTP is not","HTTP is encrypted, HTTPS is not","They're exactly the same","HTTPS is only used for email"], correct:0},
+    {q:"What is a LAN?", opts:["A network limited to one location, e.g. a home or school","The entire internet","A type of computer virus","An encryption protocol"], correct:0},
+    {q:"What is a WAN?", opts:["A network limited to a single room","A network that ties several LANs together over a larger geographic area","A firewall","A password"], correct:1},
+    {q:"What is routing?", opts:["The process where routers choose the path data takes between networks","Encrypting passwords","Scanning for viruses","Sending email"], correct:0},
+  ];
+
+  let quizOrder = [], quizIndex = 0, quizScore = 0;
+
+  function shuffle(arr){
+    const a = [...arr];
+    for(let i = a.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  function startQuiz(){
+    quizOrder = shuffle(currentLang === 'en' ? QUIZ_EN : QUIZ_SV);
+    quizIndex = 0; quizScore = 0;
+    document.getElementById('faqSection').style.display = 'none';
+    document.getElementById('quizSection').style.display = 'block';
+    document.getElementById('quizStartBtn').style.display = 'none';
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion(){
+    const body = document.getElementById('quizBody');
+    const t = currentLang === 'en' ? {
+      perfect:"Perfect! You know your basics.", good:"Nice work, most of it stuck!", start:"Good start — check the FAQ again and try once more.",
+      retry:"Try again ↻", close:"Close", question:"Question", of:"of", score:"Score", next:"Next question →"
+    } : {
+      perfect:"Perfekt! Du kan dina grunder.", good:"Bra jobbat, sitter mesta parten!", start:"Bra start — kolla FAQ:n igen och testa på nytt.",
+      retry:"Testa igen ↻", close:"Stäng", question:"Fråga", of:"av", score:"Poäng", next:"Nästa fråga →"
+    };
+    if(quizIndex >= quizOrder.length){
+      body.innerHTML = `
+        <div class="quiz-card quiz-result">
+          <div class="score">${quizScore} / ${quizOrder.length}</div>
+          <p>${quizScore === quizOrder.length ? t.perfect : quizScore >= quizOrder.length*0.6 ? t.good : t.start}</p>
+          <button class="readmore" id="quizRestart">${t.retry}</button>
+          <button class="quiz-close" id="quizClose">${t.close}</button>
+        </div>`;
+      document.getElementById('quizRestart').addEventListener('click', startQuiz);
+      document.getElementById('quizClose').addEventListener('click', closeQuiz);
+      return;
+    }
+
+    const item = quizOrder[quizIndex];
+    const letters = ['A','B','C','D'];
+    const optOrder = shuffle(item.opts.map((text,i)=>({text, isCorrect:i===item.correct})));
+
+    body.innerHTML = `
+      <div class="quiz-card">
+        <div class="quiz-progress">${t.question} ${quizIndex+1} ${t.of} ${quizOrder.length} · ${t.score}: ${quizScore}</div>
+        <div class="quiz-q">${item.q}</div>
+        <div class="quiz-options">
+          ${optOrder.map((o,i)=>`<button class="quiz-opt" data-correct="${o.isCorrect}"><span class="letter">${letters[i]}</span>${o.text}</button>`).join('')}
+        </div>
+        <button class="quiz-next" id="quizNext">${t.next}</button>
+      </div>`;
+
+    const optButtons = body.querySelectorAll('.quiz-opt');
+    optButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const isCorrect = btn.dataset.correct === 'true';
+        optButtons.forEach(b=>{
+          b.disabled = true;
+          if(b.dataset.correct === 'true') b.classList.add('correct');
+        });
+        if(!isCorrect) btn.classList.add('wrong');
+        if(isCorrect) quizScore++;
+        document.getElementById('quizNext').style.display = 'inline-block';
+      });
+    });
+    body.querySelector('#quizNext').addEventListener('click', ()=>{
+      quizIndex++;
+      renderQuizQuestion();
+    });
+  }
+
+  function closeQuiz(){
+    document.getElementById('quizSection').style.display = 'none';
+    document.getElementById('faqSection').style.display = 'block';
+    document.getElementById('quizStartBtn').style.display = 'inline-flex';
+  }
+
+  document.getElementById('quizStartBtn').addEventListener('click', startQuiz);
+</script>
+</body>
+</html>
